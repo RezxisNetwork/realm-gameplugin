@@ -19,16 +19,33 @@ import net.rezxis.mchosting.network.packet.sync.SyncServerStarted;
 public class WSClientHandler implements ClientHandler {
 
 	public static Gson gson = new Gson();
+	public static boolean initRepeat;
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onOpen(ServerHandshake handshakedata) {
 		HashMap<String,String> map = new HashMap<>();
 		map.put("port", String.valueOf(Bukkit.getPort()));
-		map.put("id",String.valueOf(RezxisMCHosting.instance.me.getID()));
-		RezxisMCHosting.instance.ws.send(gson.toJson(new SyncAuthSocketPacket(ServerType.GAME, map)));
-		RezxisMCHosting.instance.ws.send(gson.toJson(new SyncServerStarted(RezxisMCHosting.instance.me.getOwner().toString())));
+		map.put("id",String.valueOf(RezxisMCHosting.getDBServer().getID()));
+		RezxisMCHosting.getConn().send(gson.toJson(new SyncAuthSocketPacket(ServerType.GAME, map)));
+		RezxisMCHosting.getConn().send(gson.toJson(new SyncServerStarted(RezxisMCHosting.getDBServer().getOwner().toString())));
+		if (!initRepeat) {
+			Bukkit.getScheduler().scheduleAsyncRepeatingTask(RezxisMCHosting.instance, new Runnable() {
+				public void run() {
+					if (RezxisMCHosting.getConn().isClosed()) {
+						try {
+							RezxisMCHosting.initWS();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				}
+			}, 0, 20*15);
+		}
+		initRepeat = true;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void onMessage(String message) {
 		Packet packet = gson.fromJson(message, Packet.class);

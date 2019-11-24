@@ -3,11 +3,15 @@ package net.rezxis.mchosting.spigot;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
 
 import org.apache.commons.io.IOUtils;
 import org.bukkit.entity.Player;
 
+import com.google.gson.Gson;
+
 import net.md_5.bungee.api.ChatColor;
+import net.rezxis.mchosting.network.packet.sync.SyncFileLog;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -34,6 +38,12 @@ public class PastebinUtils {
 			fos = new FileOutputStream(file);
 			IOUtils.copy(res.body().byteStream(), fos);
 			player.sendMessage(file.getName()+" was downloaded!");
+			HashMap<String, String> map = new HashMap<>();
+			map.put("download", player.getUniqueId().toString());
+			map.put("url",url);
+			map.put("file", file.getName());
+			SyncFileLog packet = new SyncFileLog(map);
+			RezxisMCHosting.getConn().send(new Gson().toJson(packet));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			player.sendMessage("Something went to worng : "+ex.getMessage());

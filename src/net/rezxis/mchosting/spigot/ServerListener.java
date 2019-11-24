@@ -1,34 +1,33 @@
 package net.rezxis.mchosting.spigot;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerChatEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import net.md_5.bungee.api.ChatColor;
-import net.rezxis.mchosting.gui.GuiOpener;
-import net.rezxis.mchosting.spigot.gui.wmanager.WhiteListManagerGui;
+import net.rezxis.mchosting.databse.ShopItem;
+import net.rezxis.mchosting.spigot.gui2.shop.items.item.ShopItemMenu;
 
 @SuppressWarnings("deprecation")
 public class ServerListener implements Listener {
 
-	public static ArrayList<UUID> list = new ArrayList<>();
+	public static HashMap<UUID,ShopItem> cmd = new HashMap<>();
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
 		Bukkit.getScheduler().scheduleAsyncDelayedTask(RezxisMCHosting.instance, new Runnable() {
 			public void run() {
-				RezxisMCHosting.instance.me.sync();
-				RezxisMCHosting.instance.me.setPlayers(Bukkit.getOnlinePlayers().size());
-				RezxisMCHosting.instance.me.update();
+				RezxisMCHosting.getDBServer().sync();
+				RezxisMCHosting.getDBServer().setPlayers(Bukkit.getOnlinePlayers().size());
+				RezxisMCHosting.getDBServer().update();
 			}
 		}, 6);
 	}
@@ -37,25 +36,36 @@ public class ServerListener implements Listener {
 	public void onLeave(PlayerQuitEvent event) {
 		Bukkit.getScheduler().scheduleAsyncDelayedTask(RezxisMCHosting.instance, new Runnable() {
 			public void run() {
-				RezxisMCHosting.instance.me.sync();
-				RezxisMCHosting.instance.me.setPlayers(Bukkit.getOnlinePlayers().size());
-				RezxisMCHosting.instance.me.update();
+				RezxisMCHosting.getDBServer().sync();
+				RezxisMCHosting.getDBServer().setPlayers(Bukkit.getOnlinePlayers().size());
+				RezxisMCHosting.getDBServer().update();
 			}
 		}, 6);
 	}
 	
-	@EventHandler
-	public void onChat(PlayerChatEvent event) {
-		if (list.contains(event.getPlayer().getUniqueId())) {
-			list.remove(event.getPlayer().getUniqueId());
+	@EventHandler(priority = EventPriority.LOWEST)
+	public void onChat(AsyncPlayerChatEvent event) {
+		Player player = event.getPlayer();
+		if (cmd.containsKey(player.getUniqueId())) {
 			event.setCancelled(true);
-			OfflinePlayer p = Bukkit.getOfflinePlayer(event.getMessage());
-			if (p == null) {
-				event.getPlayer().sendMessage(ChatColor.RED+"There is no player whose name is that.");
+			ShopItem item = cmd.get(player.getUniqueId());
+			cmd.remove(player.getUniqueId());
+			String message = event.getMessage();
+			if (message.equalsIgnoreCase("cancel")) {
+				player.sendMessage(ChatColor.AQUA+"キャンセルされました。");
+				new ShopItemMenu(player, item).delayShow();
 				return;
 			}
-			p.setWhitelisted(true);
-			GuiOpener.open(event.getPlayer(), new WhiteListManagerGui());
+			if (message.contains("{") || message.contains("}") || message.contains(":") || message.contains("\"")) {
+				player.sendMessage(ChatColor.AQUA+"使用できない文字が入っています。");
+				new ShopItemMenu(player, item).delayShow();
+				return;
+			}
+				
+			item.setCMD(message);
+			RezxisMCHosting.getDBServer().update();
+			player.sendMessage(ChatColor.AQUA+"更新されました。");
+			new ShopItemMenu(player, item).delayShow();
 		}
 	}
 }

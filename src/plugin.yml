@@ -8,5 +8,7 @@ commands:
     description: connect to lobby
   realm:
     description: open server manager
+  realmtest:
+    description: open server manager
   sa:
     description: open server manager

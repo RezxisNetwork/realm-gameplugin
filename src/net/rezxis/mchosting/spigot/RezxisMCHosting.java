@@ -1,6 +1,7 @@
 package net.rezxis.mchosting.spigot;
 
 import java.net.URI;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -12,78 +13,48 @@ import com.google.gson.Gson;
 import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.databse.DBServer;
 import net.rezxis.mchosting.databse.Database;
+import net.rezxis.mchosting.databse.tables.PlayersTable;
 import net.rezxis.mchosting.databse.tables.PluginsTable;
 import net.rezxis.mchosting.databse.tables.ServersTable;
 import net.rezxis.mchosting.network.WSClient;
 import net.rezxis.mchosting.network.packet.sync.SyncPlayerSendPacket;
-import net.rezxis.mchosting.network.packet.sync.SyncStopServer;
 import net.rezxis.mchosting.network.packet.sync.SyncStoppedServer;
+import net.rezxis.mchosting.spigot.tasks.RewardTask;
+import net.rezxis.mchosting.spigot.tasks.ShutdownTask;
 
 public class RezxisMCHosting extends JavaPlugin {
 
-	public ServersTable sTable;
-	public PluginsTable plTable;
 	public static RezxisMCHosting instance;
-	public WSClient ws;
-	public boolean isShutdown = false;
-	public DBServer me = null;
-	public Props props;
-	public int count = 0;
-	/*
-	 * 
-	 * 暇だからどんな感じなのかみちゃおっ　
-	 * 
-	 * タ　ピ　オ　カ
-	 *
-	 *☺ ンョ゛　ハー゛ 
-	 *
-	 //TODO: この世界に混沌を導く
-	 * 
-	 *
-	 * 
-	 * 
-	 */
+	private static ServersTable sTable;
+	private static PluginsTable plTable;
+	private static PlayersTable pTable;
+	private static WSClient ws;
+	private static DBServer me = null;
+	private static Props props;
+	private static boolean loaded = false;
+	
 	@SuppressWarnings("deprecation")
 	public void onEnable() {
 		instance = this;
 		Bukkit.getPluginManager().registerEvents(new ServerListener(),this);
-		if (me == null) {
+		if (!loaded) {
+			Runtime.getRuntime().addShutdownHook(new ShutdownHook());
 			props = new Props("hosting.propertis");
 			Database.init();
 			sTable = new ServersTable();
 			plTable = new PluginsTable();
-			me = sTable.getByPort(this.getServer().getPort());
-			new Thread(()->{
-					try {
-						ws = new WSClient(new URI(props.SYNC_ADDRESS), new WSClientHandler());
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					ws.connect();
-					System.out.println("reconnecting...");
-				
-			}).start();
-			Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, new Runnable() {
-				public void run() {
-					if (RezxisMCHosting.instance.count > 5) {
-						ws.send(new Gson().toJson(new SyncStopServer(me.getOwner().toString())));
-						return;
-					}
-					if (Bukkit.getServer().getOnlinePlayers().size() == 0) {
-						++RezxisMCHosting.instance.count;
-					} else {
-						RezxisMCHosting.instance.count = 0;
-					}
-				}
-			}, 0, 20*60);
-		} else {
-			me.setPort(Bukkit.getPort());
-			me.update();
+			pTable = new PlayersTable();
+		}
+		me = sTable.getByPort(this.getServer().getPort());
+		if (!loaded) {
+			initWS();
+			Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, new RewardTask(), 0, 20*60*15);
+			Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, new ShutdownTask(), 0, 20*60);
+			loaded = true;
 		}
 	}
 	
 	public void onDisable() {
-		ws.send(new Gson().toJson(new SyncStoppedServer(me.getID())));
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
@@ -94,5 +65,45 @@ public class RezxisMCHosting extends JavaPlugin {
 		player.sendMessage(ChatColor.AQUA+"接続中");
 		SyncPlayerSendPacket sPacket = new SyncPlayerSendPacket(player.getUniqueId().toString(),"lobby");
 		ws.send(new Gson().toJson(sPacket));
+	}
+	
+	public static void initWS() {
+		try {
+			ws = new WSClient(new URI(props.SYNC_ADDRESS), new WSClientHandler());
+			ws.connect();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static Props getProps() {
+		return props;
+	}
+	
+	public static DBServer getDBServer() {
+		return me;
+	}
+	
+	public static WSClient getConn() {
+		return ws;
+	}
+	
+	public static ServersTable getSTable() {
+		return sTable;
+	}
+	
+	public static PluginsTable getPLTable() {
+		return plTable;
+	}
+	
+	public static PlayersTable getPTable() {
+		return pTable;
+	}
+	
+	private class ShutdownHook extends Thread {
+		
+		public void run() {
+			ws.send(new Gson().toJson(new SyncStoppedServer(me.getID())));
+		}
 	}
 }
