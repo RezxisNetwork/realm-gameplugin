@@ -13,6 +13,7 @@ import com.google.gson.Gson;
 import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.databse.DBServer;
 import net.rezxis.mchosting.databse.Database;
+import net.rezxis.mchosting.databse.tables.CrateTable;
 import net.rezxis.mchosting.databse.tables.PlayersTable;
 import net.rezxis.mchosting.databse.tables.PluginsTable;
 import net.rezxis.mchosting.databse.tables.ServersTable;
@@ -28,6 +29,7 @@ public class RezxisMCHosting extends JavaPlugin {
 	private static ServersTable sTable;
 	private static PluginsTable plTable;
 	private static PlayersTable pTable;
+	public CrateTable cTable;
 	private static WSClient ws;
 	private static DBServer me = null;
 	private static Props props;
@@ -44,6 +46,7 @@ public class RezxisMCHosting extends JavaPlugin {
 			sTable = new ServersTable();
 			plTable = new PluginsTable();
 			pTable = new PlayersTable();
+			cTable = new CrateTable();
 		}
 		me = sTable.getByPort(this.getServer().getPort());
 		if (!loaded) {
@@ -101,7 +104,6 @@ public class RezxisMCHosting extends JavaPlugin {
 	}
 	
 	private class ShutdownHook extends Thread {
-		
 		public void run() {
 			ws.send(new Gson().toJson(new SyncStoppedServer(me.getID())));
 		}
