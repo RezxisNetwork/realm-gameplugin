@@ -1,11 +1,14 @@
 package net.rezxis.mchosting.spigot.tasks;
 
+import java.util.Random;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.databse.DBPlayer;
+import net.rezxis.mchosting.databse.crates.CrateTypes;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;
 
 public class RewardTask extends BukkitRunnable {
@@ -25,6 +28,11 @@ public class RewardTask extends BukkitRunnable {
 			player.sendMessage(ChatColor.GREEN+"報酬箱を手に入れました！ロビーでチェストをクリックして、開けます！");
 			dp.addCoin(coin);
 			dp.update();
+			if (new Random().nextInt(100)<= 80) {
+				RezxisMCHosting.instance.cTable.giveCrate(player.getUniqueId(), CrateTypes.NORMAL);
+			} else {
+				RezxisMCHosting.instance.cTable.giveCrate(player.getUniqueId(), CrateTypes.RARE);
+			}
 		}
 	}
 }
