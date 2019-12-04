@@ -18,6 +18,8 @@ public class RealmMenu extends GUIWindow {
 	public HashMap<Integer, GUIItem> getOptions() {
 		HashMap<Integer, GUIItem> map = new HashMap<>();
 		setItem(0, 0, new ToggleVisibleItem(), map);
+		setItem(0, 1, new OfflineBootItem(), map);
+		setItem(4, 0, new OpenBuyRankMenu(), map);
 		setItem(2, 2, new ResetOPItem(), map);
 		setItem(4, 2, new PluginManagerItem(this), map);
 		setItem(3, 3, new OpenGameRuleItem(this), map);
@@ -28,6 +30,7 @@ public class RealmMenu extends GUIWindow {
 		setItem(4, 4, new GetEarnedItem(), map);
 		setItem(8, 5, new RestartItem(), map);
 		setItem(8, 4, new StopItem(), map);
+		setItem(8, 3, new OpenSkriptItem(), map);
 		return map;
 	}
 }
