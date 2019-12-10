@@ -14,6 +14,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.databse.DBServer;
 import net.rezxis.mchosting.databse.Database;
 import net.rezxis.mchosting.databse.tables.CrateTable;
+import net.rezxis.mchosting.databse.tables.FilesTable;
 import net.rezxis.mchosting.databse.tables.PlayersTable;
 import net.rezxis.mchosting.databse.tables.PluginsTable;
 import net.rezxis.mchosting.databse.tables.ServersTable;
@@ -29,6 +30,7 @@ public class RezxisMCHosting extends JavaPlugin {
 	private static ServersTable sTable;
 	private static PluginsTable plTable;
 	private static PlayersTable pTable;
+	private static FilesTable fTable;
 	public CrateTable cTable;
 	private static WSClient ws;
 	private static DBServer me = null;
@@ -47,6 +49,7 @@ public class RezxisMCHosting extends JavaPlugin {
 			plTable = new PluginsTable();
 			pTable = new PlayersTable();
 			cTable = new CrateTable();
+			fTable = new FilesTable();
 		}
 		me = sTable.getByPort(this.getServer().getPort());
 		if (!loaded) {
@@ -97,6 +100,10 @@ public class RezxisMCHosting extends JavaPlugin {
 	
 	public static PluginsTable getPLTable() {
 		return plTable;
+	}
+	
+	public static FilesTable getFTable() {
+		return fTable;
 	}
 	
 	public static PlayersTable getPTable() {

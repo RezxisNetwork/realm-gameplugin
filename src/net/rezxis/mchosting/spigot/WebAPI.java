@@ -18,7 +18,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class PastebinUtils {
+public class WebAPI {
 
 	private static String key = "b584fa19f7b98a7990da242d20afae3c";
 	private static OkHttpClient client;
@@ -51,6 +51,21 @@ public class PastebinUtils {
 			IOUtils.closeQuietly(fos);
 		}
 	}
+	
+	public static void download(File file, String secret, String uuid) throws Exception {
+		String url = "http://localhost/worlds/api.php?type=download&secretKey="+secret+"&uuid="+uuid;
+		Response res = client.newCall(new Request.Builder().url(url).get().build()).execute();
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(file);
+			IOUtils.copy(res.body().byteStream(), fos);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			IOUtils.closeQuietly(fos);
+		}
+	}
+
 	
 	public static String upload(String data, String name) throws IOException {
 		String ret = null;

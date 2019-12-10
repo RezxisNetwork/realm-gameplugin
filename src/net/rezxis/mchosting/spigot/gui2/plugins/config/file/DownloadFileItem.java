@@ -13,7 +13,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.gui.GUIWindow;
-import net.rezxis.mchosting.spigot.PastebinUtils;
+import net.rezxis.mchosting.spigot.WebAPI;
 
 public class DownloadFileItem extends GUIItem {
 
@@ -39,7 +39,7 @@ public class DownloadFileItem extends GUIItem {
 		e.getWhoClicked().sendMessage(ChatColor.AQUA+"Uploading "+file.getName());
 		new Thread(()->{
 			try {
-				String ret = PastebinUtils.upload(FileUtils.readFileToString(file, "UTF-8"), file.getName()+"-"+e.getWhoClicked().getName());
+				String ret = WebAPI.upload(FileUtils.readFileToString(file, "UTF-8"), file.getName()+"-"+e.getWhoClicked().getName());
 				e.getWhoClicked().sendMessage("Uploaded : "+ret);
 			} catch (IOException ex) {
 				ex.printStackTrace();

@@ -27,8 +27,14 @@ public class ConfigManagerMenu extends GUIWindow {
 	public HashMap<Integer, GUIItem> getOptions() {
 		HashMap<Integer, GUIItem> map = new HashMap<>();
 		map.put(0, new ItemBack(back));
+		boolean managable = RezxisMCHosting.getPTable().get(RezxisMCHosting.getDBServer().getOwner()).getRank().getPluginUpload();
 		int i = 1;
 		if (!isRoot) {
+			map.put(1, new DeleteDirectoryItem(file));
+			map.put(2, new CreateDirectoryItem(file, this));
+			map.put(3, new CreateFileItem(file, this));
+			i = 4;
+		} else if (managable) {
 			map.put(1, new DeleteDirectoryItem(file));
 			map.put(2, new CreateDirectoryItem(file, this));
 			map.put(3, new CreateFileItem(file, this));
@@ -36,13 +42,22 @@ public class ConfigManagerMenu extends GUIWindow {
 		}
 		for (File f : file.listFiles()) {
 			if (!(f.getName().contains("database.propertis") || f.getName().contains("hosting.propertis"))) {
-				if (!f.getName().contains(".jar") ) {
-					if (f.isDirectory()) {
-						map.put(i, new DirectoryItem(f,this));
-					} else {
-						map.put(i, new ConfigItem(f,this));
+				if (!f.getName().contains("GamePlugin.jar")) {
+					if (!f.getName().contains(".jar") ) {
+						if (f.isDirectory()) {
+							map.put(i, new DirectoryItem(f,this));
+						} else {
+							map.put(i, new ConfigItem(f,this));
+						}
+						i++;
+					} else if (managable) {
+						if (f.isDirectory()) {
+							map.put(i, new DirectoryItem(f,this));
+						} else {
+							map.put(i, new ConfigItem(f,this));
+						}
+						i++;
 					}
-					i++;
 				}
 			}
 		}
