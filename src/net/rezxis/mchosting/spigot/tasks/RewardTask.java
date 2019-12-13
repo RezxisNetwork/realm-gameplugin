@@ -7,8 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import net.md_5.bungee.api.ChatColor;
-import net.rezxis.mchosting.databse.DBPlayer;
-import net.rezxis.mchosting.databse.crates.CrateTypes;
+import net.rezxis.mchosting.database.DBPlayer;
+import net.rezxis.mchosting.database.crates.CrateTypes;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;
 
 public class RewardTask extends BukkitRunnable {

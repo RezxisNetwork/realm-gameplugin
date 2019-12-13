@@ -5,8 +5,8 @@ import java.util.HashMap;
 
 import org.bukkit.entity.Player;
 
-import net.rezxis.mchosting.databse.DBServer;
-import net.rezxis.mchosting.databse.ShopItem;
+import net.rezxis.mchosting.database.DBServer;
+import net.rezxis.mchosting.database.ShopItem;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.gui.GUIWindow;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;

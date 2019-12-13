@@ -10,8 +10,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
-import net.rezxis.mchosting.databse.DBPlayer;
-import net.rezxis.mchosting.databse.DBPlayer.Rank;
+import net.rezxis.mchosting.database.DBPlayer;
+import net.rezxis.mchosting.database.DBPlayer.Rank;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;

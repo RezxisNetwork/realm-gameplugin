@@ -15,6 +15,7 @@ import net.rezxis.mchosting.network.packet.PacketType;
 import net.rezxis.mchosting.network.packet.ServerType;
 import net.rezxis.mchosting.network.packet.sync.SyncAuthSocketPacket;
 import net.rezxis.mchosting.network.packet.sync.SyncServerStarted;
+import net.rezxis.mchosting.spigot.tasks.ShutdownVMHook;
 
 public class WSClientHandler implements ClientHandler {
 
@@ -60,6 +61,7 @@ public class WSClientHandler implements ClientHandler {
 			for (Player p : Bukkit.getOnlinePlayers()) {
 				RezxisMCHosting.instance.hub(p);
 			}
+			Runtime.getRuntime().addShutdownHook(new ShutdownVMHook(RezxisMCHosting.getConn(),RezxisMCHosting.getDBServer().getID()));
 			Bukkit.getScheduler().scheduleAsyncDelayedTask(RezxisMCHosting.instance, new Runnable() {
 				public void run() {
 					Bukkit.getServer().shutdown();

@@ -11,13 +11,13 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.google.gson.Gson;
 
 import net.md_5.bungee.api.ChatColor;
-import net.rezxis.mchosting.databse.DBServer;
-import net.rezxis.mchosting.databse.Database;
-import net.rezxis.mchosting.databse.tables.CrateTable;
-import net.rezxis.mchosting.databse.tables.FilesTable;
-import net.rezxis.mchosting.databse.tables.PlayersTable;
-import net.rezxis.mchosting.databse.tables.PluginsTable;
-import net.rezxis.mchosting.databse.tables.ServersTable;
+import net.rezxis.mchosting.database.DBServer;
+import net.rezxis.mchosting.database.Database;
+import net.rezxis.mchosting.database.tables.CrateTable;
+import net.rezxis.mchosting.database.tables.FilesTable;
+import net.rezxis.mchosting.database.tables.PlayersTable;
+import net.rezxis.mchosting.database.tables.PluginsTable;
+import net.rezxis.mchosting.database.tables.ServersTable;
 import net.rezxis.mchosting.network.WSClient;
 import net.rezxis.mchosting.network.packet.sync.SyncPlayerSendPacket;
 import net.rezxis.mchosting.network.packet.sync.SyncStoppedServer;
@@ -42,7 +42,6 @@ public class RezxisMCHosting extends JavaPlugin {
 		instance = this;
 		Bukkit.getPluginManager().registerEvents(new ServerListener(),this);
 		if (!loaded) {
-			Runtime.getRuntime().addShutdownHook(new ShutdownHook());
 			props = new Props("hosting.propertis");
 			Database.init();
 			sTable = new ServersTable();
@@ -108,11 +107,5 @@ public class RezxisMCHosting extends JavaPlugin {
 	
 	public static PlayersTable getPTable() {
 		return pTable;
-	}
-	
-	private class ShutdownHook extends Thread {
-		public void run() {
-			ws.send(new Gson().toJson(new SyncStoppedServer(me.getID())));
-		}
 	}
 }
