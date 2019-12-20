@@ -61,8 +61,7 @@ public class WSClientHandler implements ClientHandler {
 			for (Player p : Bukkit.getOnlinePlayers()) {
 				RezxisMCHosting.instance.hub(p);
 			}
-			Runtime.getRuntime().addShutdownHook(new ShutdownVMHook(RezxisMCHosting.getConn(),RezxisMCHosting.getDBServer().getID()));
-			Bukkit.getScheduler().scheduleAsyncDelayedTask(RezxisMCHosting.instance, new Runnable() {
+			Bukkit.getScheduler().scheduleSyncDelayedTask(RezxisMCHosting.instance, new Runnable() {
 				public void run() {
 					Bukkit.getServer().shutdown();
 				}

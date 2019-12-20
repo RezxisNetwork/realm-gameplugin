@@ -22,14 +22,14 @@ public class OfflineBootItem extends GUIItem {
 	private static ItemStack getIcon() {
 		Material m = null;
 		DBPlayer player = RezxisMCHosting.getPTable().get(RezxisMCHosting.getDBServer().getOwner());
-		if (player.getOfflineBoot()) {
+		if (player.isOfflineBoot()) {
 			m = Material.TORCH;
 		} else {
 			m = Material.LEVER;
 		}
 		ItemStack is = new ItemStack(m);
 		ItemMeta im = is.getItemMeta();
-		if (player.getOfflineBoot()) {
+		if (player.isOfflineBoot()) {
 			im.setDisplayName(ChatColor.GREEN+"有効");
 		} else {
 			im.setDisplayName(ChatColor.RED+"無効");
@@ -49,7 +49,7 @@ public class OfflineBootItem extends GUIItem {
 			e.getWhoClicked().sendMessage(ChatColor.RED+"Rankが必要です。");
 			return GUIAction.NO_ACTION;
 		}
-		player.setOfflineBoot(!player.getOfflineBoot());
+		player.setOfflineBoot(!player.isOfflineBoot());
 		player.update();
 		return GUIAction.UPDATE;
 	}

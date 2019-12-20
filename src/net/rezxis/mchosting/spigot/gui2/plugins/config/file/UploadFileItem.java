@@ -90,7 +90,7 @@ public class UploadFileItem extends GUIItem {
 				RezxisMCHosting.getFTable().insert(dfile);
 			}
 			final DBFile f = dfile;
-			if (!dfile.getUploaded()) {
+			if (!dfile.isUploaded()) {
 				String url = "https://world.rezxis.net/upload.php?uuid="+dfile.getUUID()+"&secretKey="+dfile.getSecret();
 				e.getWhoClicked().sendMessage(ChatColor.YELLOW+"アップロードしてください。"+ChatColor.GREEN+url);
 			} else {

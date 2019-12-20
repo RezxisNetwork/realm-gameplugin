@@ -21,8 +21,10 @@ import net.rezxis.mchosting.database.tables.ServersTable;
 import net.rezxis.mchosting.network.WSClient;
 import net.rezxis.mchosting.network.packet.sync.SyncPlayerSendPacket;
 import net.rezxis.mchosting.network.packet.sync.SyncStoppedServer;
+import net.rezxis.mchosting.spigot.tasks.ForceVMKillTask;
 import net.rezxis.mchosting.spigot.tasks.RewardTask;
 import net.rezxis.mchosting.spigot.tasks.ShutdownTask;
+import net.rezxis.mchosting.spigot.tasks.ShutdownVMHook;
 
 public class RezxisMCHosting extends JavaPlugin {
 
@@ -36,6 +38,8 @@ public class RezxisMCHosting extends JavaPlugin {
 	private static DBServer me = null;
 	private static Props props;
 	private static boolean loaded = false;
+	public static boolean reload = false;
+	public static ShutdownVMHook hook = null;
 	
 	@SuppressWarnings("deprecation")
 	public void onEnable() {
@@ -56,10 +60,17 @@ public class RezxisMCHosting extends JavaPlugin {
 			Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, new RewardTask(), 0, 20*60*15);
 			Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, new ShutdownTask(), 0, 20*60);
 			loaded = true;
+			hook = new ShutdownVMHook(ws,me.getID());
+			Runtime.getRuntime().addShutdownHook(hook);
 		}
 	}
 	
 	public void onDisable() {
+		if (!reload) {
+			new ForceVMKillTask().start();
+		} else {
+			Runtime.getRuntime().removeShutdownHook(hook);
+		}
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {

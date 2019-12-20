@@ -9,6 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -41,6 +42,23 @@ public class ServerListener implements Listener {
 				RezxisMCHosting.getDBServer().update();
 			}
 		}, 6);
+	}
+	
+	@EventHandler
+	public void onCommand(PlayerCommandPreprocessEvent event) {
+		boolean flag = false;
+		if (event.getMessage().equalsIgnoreCase("/bukkit:reload")) {
+			flag = true;
+		} else if (event.getMessage().equalsIgnoreCase("/reload")) {
+			flag = true;
+		} else if (event.getMessage().equalsIgnoreCase("bukkit:reload")) {
+			flag = true;
+		} else if (event.getMessage().equalsIgnoreCase("reload")) {
+			flag = true;
+		}
+		if (flag) {
+			RezxisMCHosting.reload = true;
+		}
 	}
 	
 	@EventHandler(priority = EventPriority.LOWEST)
