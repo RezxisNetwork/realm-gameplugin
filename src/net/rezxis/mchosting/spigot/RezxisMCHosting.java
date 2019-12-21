@@ -11,8 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.google.gson.Gson;
 
 import net.md_5.bungee.api.ChatColor;
-import net.rezxis.mchosting.database.DBServer;
 import net.rezxis.mchosting.database.Database;
+import net.rezxis.mchosting.database.object.server.DBServer;
 import net.rezxis.mchosting.database.tables.CrateTable;
 import net.rezxis.mchosting.database.tables.FilesTable;
 import net.rezxis.mchosting.database.tables.PlayersTable;

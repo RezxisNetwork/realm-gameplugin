@@ -14,7 +14,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import net.md_5.bungee.api.ChatColor;
-import net.rezxis.mchosting.database.ShopItem;
+import net.rezxis.mchosting.database.object.server.ShopItem;
 import net.rezxis.mchosting.spigot.gui2.shop.items.item.ShopItemMenu;
 
 @SuppressWarnings("deprecation")
