@@ -22,13 +22,13 @@ public class ToggleVisibleItem extends GUIItem {
 	private static ItemStack getIcon() {
 		ItemStack is = null;
 		DBServer server = RezxisMCHosting.getDBServer();
-		if (server.getVisible()) {
+		if (server.isVisible()) {
 			is = new ItemStack(Material.LIME_SHULKER_BOX);
 		} else  {
 			is = new ItemStack(Material.RED_SHULKER_BOX);
 		}
 		ItemMeta im = is.getItemMeta();
-		if (server.getVisible()) {
+		if (server.isVisible()) {
 			im.setDisplayName(ChatColor.GREEN+"表示");
 		} else {
 			im.setDisplayName(ChatColor.RED+"非表示");
@@ -45,7 +45,7 @@ public class ToggleVisibleItem extends GUIItem {
 	public GUIAction invClick(InventoryClickEvent e) {
 		DBServer server = RezxisMCHosting.getDBServer();
 		server.sync();
-		server.setVisible(!server.getVisible());
+		server.setVisible(!server.isVisible());
 		server.update();
 		return GUIAction.UPDATE;
 	}

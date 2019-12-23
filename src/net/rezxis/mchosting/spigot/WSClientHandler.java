@@ -27,7 +27,7 @@ public class WSClientHandler implements ClientHandler {
 	public void onOpen(ServerHandshake handshakedata) {
 		HashMap<String,String> map = new HashMap<>();
 		map.put("port", String.valueOf(Bukkit.getPort()));
-		map.put("id",String.valueOf(RezxisMCHosting.getDBServer().getID()));
+		map.put("id",String.valueOf(RezxisMCHosting.getDBServer().getId()));
 		RezxisMCHosting.getConn().send(gson.toJson(new SyncAuthSocketPacket(ServerType.GAME, map)));
 		RezxisMCHosting.getConn().send(gson.toJson(new SyncServerStarted(RezxisMCHosting.getDBServer().getOwner().toString())));
 		if (!initRepeat) {

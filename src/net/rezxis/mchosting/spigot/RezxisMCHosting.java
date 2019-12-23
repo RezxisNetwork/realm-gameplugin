@@ -60,7 +60,7 @@ public class RezxisMCHosting extends JavaPlugin {
 			Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, new RewardTask(), 0, 20*60*15);
 			Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, new ShutdownTask(), 0, 20*60);
 			loaded = true;
-			hook = new ShutdownVMHook(ws,me.getID());
+			hook = new ShutdownVMHook(ws,me.getId());
 			Runtime.getRuntime().addShutdownHook(hook);
 		}
 	}
