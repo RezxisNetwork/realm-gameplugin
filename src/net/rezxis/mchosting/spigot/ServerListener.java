@@ -55,6 +55,18 @@ public class ServerListener implements Listener {
 			flag = true;
 		} else if (event.getMessage().equalsIgnoreCase("reload")) {
 			flag = true;
+		} else if (event.getMessage().equalsIgnoreCase("rl")) {
+			flag = true;
+		} else if (event.getMessage().equalsIgnoreCase("/rl")) {
+			flag = true;
+		} else if (event.getMessage().equalsIgnoreCase("bukkit:rl")) {
+			flag = true;
+		} else if (event.getMessage().equalsIgnoreCase("/bukkit:rl")) {
+			flag = true;
+		} else if (event.getMessage().contains("restart")) {
+			event.setCancelled(true);
+			event.getPlayer().sendMessage(ChatColor.RED+"/restartは使用できません。/realmから再起動を使っていください");
+			return;
 		}
 		if (flag) {
 			RezxisMCHosting.reload = true;
