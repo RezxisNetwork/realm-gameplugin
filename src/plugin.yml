@@ -2,10 +2,6 @@ name: RezxisMCHosting
 main: net.rezxis.mchosting.spigot.RezxisMCHosting
 version: 0.2
 commands:
-  hub:
-    description: connect to lobby
-  lobby:
-    description: connect to lobby
   realm:
     description: open server manager
   realmtest:

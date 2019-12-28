@@ -12,9 +12,7 @@ public class CommandHandler {
 
 	public static boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		Player player = (Player)sender;
-		if (cmd.getName().equalsIgnoreCase("hub") || cmd.getName().equalsIgnoreCase("lobby")) {
-			RezxisMCHosting.instance.hub(player);
-		}else if (cmd.getName().equalsIgnoreCase("realm") || cmd.getName().equalsIgnoreCase("sa")) {
+		if (cmd.getName().equalsIgnoreCase("realm") || cmd.getName().equalsIgnoreCase("sa")) {
 			if (player.getUniqueId().toString().equals(RezxisMCHosting.getDBServer().getOwner().toString())) {
 				new RealmMenu(player).delayShow();
 			} else {
