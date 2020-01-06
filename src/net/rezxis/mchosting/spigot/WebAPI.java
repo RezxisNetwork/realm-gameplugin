@@ -20,7 +20,7 @@ import okhttp3.Response;
 
 public class WebAPI {
 
-	private static String key = "b584fa19f7b98a7990da242d20afae3c";
+	private static String key = "8Kzvb4iW76blMJWl";
 	private static OkHttpClient client;
 	
 	static {
@@ -28,10 +28,6 @@ public class WebAPI {
 	}
 	
 	public static void download(String url, File file, Player player) throws Exception {
-		if (!url.contains("pastebin")) {
-			player.sendMessage(ChatColor.RED+"you can use only pastebin to upload configs!");
-			return;
-		}
 		Response res = client.newCall(new Request.Builder().url(url).get().build()).execute();
 		FileOutputStream fos = null;
 		try {
@@ -77,7 +73,7 @@ public class WebAPI {
 		.add("api_paste_name", name)
 		.add("api_paste_expire_date","10M")
 		.add("api_paste_format", "text").build();
-		Response response = client.newCall(new Request.Builder().url("http://pastebin.com/api/api_post.php").post(body).build()).execute();
+		Response response = client.newCall(new Request.Builder().url("https://paste.mcua.net/api/post").post(body).build()).execute();
 		ret = response.body().string();
 		return ret;
 	}

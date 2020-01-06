@@ -22,7 +22,6 @@ import net.rezxis.mchosting.network.WSClient;
 import net.rezxis.mchosting.network.packet.sync.SyncPlayerSendPacket;
 import net.rezxis.mchosting.network.packet.sync.SyncStoppedServer;
 import net.rezxis.mchosting.spigot.tasks.ForceVMKillTask;
-import net.rezxis.mchosting.spigot.tasks.RewardTask;
 import net.rezxis.mchosting.spigot.tasks.ShutdownTask;
 import net.rezxis.mchosting.spigot.tasks.ShutdownVMHook;
 
@@ -36,7 +35,7 @@ public class RezxisMCHosting extends JavaPlugin {
 	public CrateTable cTable;
 	private static WSClient ws;
 	private static DBServer me = null;
-	private static Props props;
+	//private static Props props;
 	private static boolean loaded = false;
 	public static boolean reload = false;
 	public static ShutdownVMHook hook = null;
@@ -46,8 +45,8 @@ public class RezxisMCHosting extends JavaPlugin {
 		instance = this;
 		Bukkit.getPluginManager().registerEvents(new ServerListener(),this);
 		if (!loaded) {
-			props = new Props("hosting.propertis");
-			Database.init();
+			//props = new Props("hosting.propertis");
+			Database.init(System.getenv("db_host"),System.getenv("db_user"),System.getenv("db_pass"),System.getenv("db_port"),System.getenv("db_name"));
 			sTable = new ServersTable();
 			plTable = new PluginsTable();
 			pTable = new PlayersTable();
@@ -57,7 +56,6 @@ public class RezxisMCHosting extends JavaPlugin {
 		me = sTable.getByPort(this.getServer().getPort());
 		if (!loaded) {
 			initWS();
-			Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, new RewardTask(), 0, 20*60*15);
 			Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, new ShutdownTask(), 0, 20*60);
 			loaded = true;
 			hook = new ShutdownVMHook(ws,me.getId());
@@ -85,16 +83,17 @@ public class RezxisMCHosting extends JavaPlugin {
 	
 	public static void initWS() {
 		try {
-			ws = new WSClient(new URI(props.SYNC_ADDRESS), new WSClientHandler());
+			//ws = new WSClient(new URI(props.SYNC_ADDRESS), new WSClientHandler());
+			ws = new WSClient(new URI(System.getenv("sync_address")), new WSClientHandler());
 			ws.connect();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public static Props getProps() {
+	/*public static Props getProps() {
 		return props;
-	}
+	}*/
 	
 	public static DBServer getDBServer() {
 		return me;

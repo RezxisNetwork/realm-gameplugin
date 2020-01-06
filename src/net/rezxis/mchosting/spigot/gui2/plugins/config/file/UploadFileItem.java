@@ -55,13 +55,13 @@ public class UploadFileItem extends GUIItem {
 					if (text == null) {
 						return AnvilGUI.Response.text("URLを入れてください。");
 					} else {
-						if (text.contains("pastebin.com/raw/")) {
+						if (text.contains("paste.mcua.net/raw/")) {
 							link = text;
 						} else {
-							if (text.contains("pastebin.com/")) {
-								link = "https://pastebin.com/raw/"+text.split("pastebin.com/")[1];
+							if (text.contains("paste.mcua.net/")) {
+								link = "https://paste.mcua.net/raw/"+text.split("paste.mcua.net/")[1];
 							} else {
-								pl.sendMessage(ChatColor.RED+"正しいURLを入れてください");
+								pl.sendMessage(ChatColor.RED+"https://paste.mcua.net を使ってください。");
 								return AnvilGUI.Response.close();
 							}
 						}
