@@ -32,10 +32,8 @@ public class RezxisMCHosting extends JavaPlugin {
 	private static PluginsTable plTable;
 	private static PlayersTable pTable;
 	private static FilesTable fTable;
-	public CrateTable cTable;
 	private static WSClient ws;
 	private static DBServer me = null;
-	//private static Props props;
 	private static boolean loaded = false;
 	public static boolean reload = false;
 	public static ShutdownVMHook hook = null;
@@ -45,12 +43,10 @@ public class RezxisMCHosting extends JavaPlugin {
 		instance = this;
 		Bukkit.getPluginManager().registerEvents(new ServerListener(),this);
 		if (!loaded) {
-			//props = new Props("hosting.propertis");
 			Database.init(System.getenv("db_host"),System.getenv("db_user"),System.getenv("db_pass"),System.getenv("db_port"),System.getenv("db_name"));
 			sTable = new ServersTable();
 			plTable = new PluginsTable();
 			pTable = new PlayersTable();
-			cTable = new CrateTable();
 			fTable = new FilesTable();
 		}
 		me = sTable.getByPort(this.getServer().getPort());
