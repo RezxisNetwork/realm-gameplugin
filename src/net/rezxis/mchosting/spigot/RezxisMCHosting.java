@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 
 import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.database.Database;
+import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.server.DBServer;
 import net.rezxis.mchosting.database.tables.CrateTable;
 import net.rezxis.mchosting.database.tables.FilesTable;
@@ -28,10 +29,6 @@ import net.rezxis.mchosting.spigot.tasks.ShutdownVMHook;
 public class RezxisMCHosting extends JavaPlugin {
 
 	public static RezxisMCHosting instance;
-	private static ServersTable sTable;
-	private static PluginsTable plTable;
-	private static PlayersTable pTable;
-	private static FilesTable fTable;
 	private static WSClient ws;
 	private static DBServer me = null;
 	private static boolean loaded = false;
@@ -44,12 +41,8 @@ public class RezxisMCHosting extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new ServerListener(),this);
 		if (!loaded) {
 			Database.init(System.getenv("db_host"),System.getenv("db_user"),System.getenv("db_pass"),System.getenv("db_port"),System.getenv("db_name"));
-			sTable = new ServersTable();
-			plTable = new PluginsTable();
-			pTable = new PlayersTable();
-			fTable = new FilesTable();
 		}
-		me = sTable.getByPort(this.getServer().getPort());
+		me = Tables.getSTable().getByPort(this.getServer().getPort());
 		if (!loaded) {
 			initWS();
 			Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, new ShutdownTask(), 0, 20*60);
@@ -97,21 +90,5 @@ public class RezxisMCHosting extends JavaPlugin {
 	
 	public static WSClient getConn() {
 		return ws;
-	}
-	
-	public static ServersTable getSTable() {
-		return sTable;
-	}
-	
-	public static PluginsTable getPLTable() {
-		return plTable;
-	}
-	
-	public static FilesTable getFTable() {
-		return fTable;
-	}
-	
-	public static PlayersTable getPTable() {
-		return pTable;
 	}
 }

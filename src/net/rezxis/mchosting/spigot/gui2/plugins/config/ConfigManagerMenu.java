@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import org.bukkit.entity.Player;
 
+import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.gui.GUIWindow;
 import net.rezxis.mchosting.gui.ItemBack;
@@ -27,7 +28,7 @@ public class ConfigManagerMenu extends GUIWindow {
 	public HashMap<Integer, GUIItem> getOptions() {
 		HashMap<Integer, GUIItem> map = new HashMap<>();
 		map.put(0, new ItemBack(back));
-		boolean managable = RezxisMCHosting.getPTable().get(RezxisMCHosting.getDBServer().getOwner()).getRank().getPluginUpload();
+		boolean managable = Tables.getPTable().get(RezxisMCHosting.getDBServer().getOwner()).getRank().getPluginUpload();
 		int i = 1;
 		if (!isRoot) {
 			map.put(1, new DeleteDirectoryItem(file));

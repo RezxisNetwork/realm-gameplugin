@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
+import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.player.DBPlayer;
 import net.rezxis.mchosting.database.object.player.DBPlayer.Rank;
 import net.rezxis.mchosting.gui.GUIAction;
@@ -40,7 +41,7 @@ public class DiamondRankItem extends GUIItem {
 
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
-		DBPlayer player = RezxisMCHosting.getPTable().get(e.getWhoClicked().getUniqueId());
+		DBPlayer player = Tables.getPTable().get(e.getWhoClicked().getUniqueId());
 		if (player.getCoin() < price) {
 			e.getWhoClicked().sendMessage(ChatColor.RED+"コインが足りません。");
 			return GUIAction.NO_ACTION;

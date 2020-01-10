@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
+import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.player.DBPlayer;
 import net.rezxis.mchosting.database.object.server.DBServer;
 import net.rezxis.mchosting.database.object.server.ShopItem;
@@ -47,7 +48,7 @@ public class GetEarnedItem extends GUIItem {
 		if (coin == 0) {
 			e.getWhoClicked().sendMessage(ChatColor.RED+"利益は0なので回収できません。");
 		} else {
-			DBPlayer dp = RezxisMCHosting.getPTable().get(e.getWhoClicked().getUniqueId());
+			DBPlayer dp = Tables.getPTable().get(e.getWhoClicked().getUniqueId());
 			dp.addCoin(coin);
 			dp.update();
 			DBServer server = RezxisMCHosting.getDBServer();

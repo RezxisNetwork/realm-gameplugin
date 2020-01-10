@@ -8,6 +8,7 @@ import java.util.HashMap;
 import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
+import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.server.DBPlugin;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.gui.GUIWindow;
@@ -30,7 +31,7 @@ public class PluginManagerMenu extends GUIWindow {
 		HashMap<Integer,GUIItem> map = new HashMap<>();
 		setItem(4, new PluginStatus(), map);
 		setItem(0, new ItemBack(back), map);
-		ArrayList<DBPlugin> plugins = new ArrayList<DBPlugin>(RezxisMCHosting.getPLTable().getPlugins().values());
+		ArrayList<DBPlugin> plugins = new ArrayList<DBPlugin>(Tables.getPlTable().getPlugins().values());
 		Collections.sort(plugins, new Sort());
 		if (page > 1) {
 			setItem(0, 5, new BackPluginPage(page,back), map);

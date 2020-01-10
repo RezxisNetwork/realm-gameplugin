@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
+import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;
@@ -24,7 +25,7 @@ public class PluginStatus extends GUIItem {
 		ItemMeta im = is.getItemMeta();
 		im.setDisplayName(ChatColor.AQUA+"Server plugin status");
 		ArrayList<String> list = new ArrayList<String>();
-		list.add(ChatColor.AQUA+"selectable plugins : "+(RezxisMCHosting.getPLTable().getPlugins().size()-2));
+		list.add(ChatColor.AQUA+"selectable plugins : "+(Tables.getPlTable().getPlugins().size()-2));
 		list.add(ChatColor.AQUA+"enabled plugin : "+Bukkit.getPluginManager().getPlugins().length);
 		im.setLore(list);
 		is.setItemMeta(im);

@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
+import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.player.DBPlayer;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
@@ -21,7 +22,7 @@ public class YourCoinItem extends GUIItem {
 	}
 	
 	private static ItemStack getIcon(Player player) {
-		DBPlayer dp = RezxisMCHosting.getPTable().get(player.getUniqueId());
+		DBPlayer dp = Tables.getPTable().get(player.getUniqueId());
 		ItemStack is = new ItemStack(Material.GOLD_INGOT);
 		ItemMeta im = is.getItemMeta();
 		im.setDisplayName(ChatColor.LIGHT_PURPLE+"Realm"+ChatColor.GOLD+"Coins");

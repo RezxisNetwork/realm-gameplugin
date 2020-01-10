@@ -8,6 +8,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
+import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.player.DBPlayer;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
@@ -21,7 +22,7 @@ public class OfflineBootItem extends GUIItem {
 	
 	private static ItemStack getIcon() {
 		Material m = null;
-		DBPlayer player = RezxisMCHosting.getPTable().get(RezxisMCHosting.getDBServer().getOwner());
+		DBPlayer player = Tables.getPTable().get(RezxisMCHosting.getDBServer().getOwner());
 		if (player.isOfflineBoot()) {
 			m = Material.TORCH;
 		} else {
@@ -44,7 +45,7 @@ public class OfflineBootItem extends GUIItem {
 
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
-		DBPlayer player = RezxisMCHosting.getPTable().get(RezxisMCHosting.getDBServer().getOwner());
+		DBPlayer player = Tables.getPTable().get(RezxisMCHosting.getDBServer().getOwner());
 		if (!player.getRank().getOfflineBoot()) {
 			e.getWhoClicked().sendMessage(ChatColor.RED+"Rankが必要です。");
 			return GUIAction.NO_ACTION;

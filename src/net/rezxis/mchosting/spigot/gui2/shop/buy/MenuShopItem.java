@@ -10,6 +10,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
+import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.player.DBPlayer;
 import net.rezxis.mchosting.database.object.server.ShopItem;
 import net.rezxis.mchosting.gui.GUIAction;
@@ -43,7 +44,7 @@ public class MenuShopItem extends GUIItem {
 		if (preview)
 			return GUIAction.NO_ACTION;
 		Player player = (Player) e.getWhoClicked();
-		DBPlayer dp = RezxisMCHosting.getPTable().get(player.getUniqueId());
+		DBPlayer dp = Tables.getPTable().get(player.getUniqueId());
 		if (dp.getCoin() < item.getPrice()) {
 			player.sendMessage(ChatColor.RED+"Coinが足りません。");
 			return GUIAction.CLOSE;

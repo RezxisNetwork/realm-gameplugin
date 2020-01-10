@@ -11,6 +11,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import net.md_5.bungee.api.ChatColor;
@@ -24,24 +25,32 @@ public class ServerListener implements Listener {
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
-		Bukkit.getScheduler().scheduleAsyncDelayedTask(RezxisMCHosting.instance, new Runnable() {
+		/*Bukkit.getScheduler().scheduleAsyncDelayedTask(RezxisMCHosting.instance, new Runnable() {
 			public void run() {
 				RezxisMCHosting.getDBServer().sync();
 				RezxisMCHosting.getDBServer().setPlayers(Bukkit.getOnlinePlayers().size());
 				RezxisMCHosting.getDBServer().update();
 			}
-		}, 6);
+		}, 6);*/
+	}
+	
+	@EventHandler
+	public void onKick(PlayerKickEvent event) {
+		if (event.getPlayer().getUniqueId().equals(RezxisMCHosting.getDBServer().getOwner())) {
+			event.getPlayer().sendMessage(ChatColor.RED+"あなたはkickされました。 : "+event.getReason());
+			event.setCancelled(true);
+		}
 	}
 	
 	@EventHandler
 	public void onLeave(PlayerQuitEvent event) {
-		Bukkit.getScheduler().scheduleAsyncDelayedTask(RezxisMCHosting.instance, new Runnable() {
+		/*Bukkit.getScheduler().scheduleAsyncDelayedTask(RezxisMCHosting.instance, new Runnable() {
 			public void run() {
 				RezxisMCHosting.getDBServer().sync();
 				RezxisMCHosting.getDBServer().setPlayers(Bukkit.getOnlinePlayers().size());
 				RezxisMCHosting.getDBServer().update();
 			}
-		}, 6);
+		}, 6);*/
 	}
 	
 	@EventHandler
