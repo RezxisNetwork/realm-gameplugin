@@ -10,7 +10,6 @@ import org.bukkit.entity.Player;
 
 import com.google.gson.Gson;
 
-import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.network.packet.sync.SyncFileLog;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;

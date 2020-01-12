@@ -22,6 +22,7 @@ public class RealmMenu extends GUIWindow {
 		setItem(4, 0, new OpenBuyRankMenu(), map);
 		setItem(2, 2, new ResetOPItem(), map);
 		setItem(4, 2, new PluginManagerItem(this), map);
+		setItem(4, 3, new ChangeVoteListener(), map);
 		setItem(3, 3, new OpenGameRuleItem(this), map);
 		setItem(6, 2, new ServerIconItem(), map);
 		setItem(5, 3, new MotdItem(), map);

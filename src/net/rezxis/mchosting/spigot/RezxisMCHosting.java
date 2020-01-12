@@ -1,12 +1,17 @@
 package net.rezxis.mchosting.spigot;
 
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.net.URI;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.messaging.PluginMessageListener;
 
 import com.google.gson.Gson;
 
@@ -14,14 +19,8 @@ import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.database.Database;
 import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.server.DBServer;
-import net.rezxis.mchosting.database.tables.CrateTable;
-import net.rezxis.mchosting.database.tables.FilesTable;
-import net.rezxis.mchosting.database.tables.PlayersTable;
-import net.rezxis.mchosting.database.tables.PluginsTable;
-import net.rezxis.mchosting.database.tables.ServersTable;
 import net.rezxis.mchosting.network.WSClient;
 import net.rezxis.mchosting.network.packet.sync.SyncPlayerSendPacket;
-import net.rezxis.mchosting.network.packet.sync.SyncStoppedServer;
 import net.rezxis.mchosting.spigot.tasks.ForceVMKillTask;
 import net.rezxis.mchosting.spigot.tasks.ShutdownTask;
 import net.rezxis.mchosting.spigot.tasks.ShutdownVMHook;
@@ -42,7 +41,7 @@ public class RezxisMCHosting extends JavaPlugin {
 		if (!loaded) {
 			Database.init(System.getenv("db_host"),System.getenv("db_user"),System.getenv("db_pass"),System.getenv("db_port"),System.getenv("db_name"));
 		}
-		me = Tables.getSTable().getByPort(this.getServer().getPort());
+		me = Tables.getSTable().get(UUID.fromString(System.getenv("sowner")));
 		if (!loaded) {
 			initWS();
 			Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, new ShutdownTask(), 0, 20*60);
@@ -50,6 +49,7 @@ public class RezxisMCHosting extends JavaPlugin {
 			hook = new ShutdownVMHook(ws,me.getId());
 			Runtime.getRuntime().addShutdownHook(hook);
 		}
+		getServer().getMessenger().registerIncomingPluginChannel(this,"rezxis",new PMessageListener());
 	}
 	
 	public void onDisable() {
@@ -72,7 +72,6 @@ public class RezxisMCHosting extends JavaPlugin {
 	
 	public static void initWS() {
 		try {
-			//ws = new WSClient(new URI(props.SYNC_ADDRESS), new WSClientHandler());
 			ws = new WSClient(new URI(System.getenv("sync_address")), new WSClientHandler());
 			ws.connect();
 		} catch (Exception e) {
@@ -80,15 +79,35 @@ public class RezxisMCHosting extends JavaPlugin {
 		}
 	}
 	
-	/*public static Props getProps() {
-		return props;
-	}*/
-	
 	public static DBServer getDBServer() {
 		return me;
 	}
 	
 	public static WSClient getConn() {
 		return ws;
+	}
+	
+	private class PMessageListener implements PluginMessageListener {
+
+		@Override
+		public void onPluginMessageReceived(String ch, Player player, byte[] body) {
+			if (ch.equalsIgnoreCase("rezxis")) {
+				DataInputStream in = new DataInputStream(new ByteArrayInputStream(body));
+				String arg0 = null;
+				String arg1 = null;
+				try {
+					arg0 = in.readUTF();
+					arg1 = in.readUTF();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				if (arg0.equalsIgnoreCase("vote")) {
+					me.sync();
+					if (!me.getVoteCmd().isEmpty()) {
+						Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), me.getVoteCmd().replace("[player]", arg1));
+					}
+				}
+			}
+		}
 	}
 }
