@@ -80,6 +80,7 @@ public class RezxisMCHosting extends JavaPlugin {
 	}
 	
 	public static DBServer getDBServer() {
+		me.sync();
 		return me;
 	}
 	

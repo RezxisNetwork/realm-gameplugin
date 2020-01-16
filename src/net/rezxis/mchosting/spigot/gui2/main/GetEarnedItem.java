@@ -41,7 +41,8 @@ public class GetEarnedItem extends GUIItem {
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
 		int coin = 0;
-		for (ShopItem item : RezxisMCHosting.getDBServer().getShop().getItems()) {
+		DBServer ds = RezxisMCHosting.getDBServer();
+		for (ShopItem item : ds.getShop().getItems()) {
 			coin += item.getEarned();
 			item.setEarned(0);
 		}
@@ -51,8 +52,7 @@ public class GetEarnedItem extends GUIItem {
 			DBPlayer dp = Tables.getPTable().get(e.getWhoClicked().getUniqueId());
 			dp.addCoin(coin);
 			dp.update();
-			DBServer server = RezxisMCHosting.getDBServer();
-			server.update();
+			ds.update();
 			e.getWhoClicked().sendMessage(""+ChatColor.AQUA+coin+ChatColor.GOLD+"Realm"+ChatColor.AQUA+"Coins"+ChatColor.AQUA+"回収されました。");
 		}
 		return GUIAction.UPDATE;

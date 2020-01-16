@@ -10,6 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.database.object.server.DBPlugin;
+import net.rezxis.mchosting.database.object.server.DBServer;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;
@@ -51,14 +52,15 @@ private DBPlugin plugin;
 
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
-		ArrayList<String> list = RezxisMCHosting.getDBServer().getPlugins();
-		if (RezxisMCHosting.getDBServer().getPlugins().contains(plugin.getName())) {
+		DBServer ds = RezxisMCHosting.getDBServer();
+		ArrayList<String> list = ds.getPlugins();
+		if (ds.getPlugins().contains(plugin.getName())) {
 			list.remove(plugin.getName());
 		} else {
 			list.add(plugin.getName());
 		}
-		RezxisMCHosting.getDBServer().setPlugins(list);
-		RezxisMCHosting.getDBServer().update();
+		ds.setPlugins(list);
+		ds.update();
 		e.getWhoClicked().sendMessage(ChatColor.AQUA+"変更を反映するには再起動してください。");
 		return GUIAction.UPDATE;
 	}

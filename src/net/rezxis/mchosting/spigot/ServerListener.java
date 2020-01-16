@@ -19,6 +19,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.player.DBPlayer;
+import net.rezxis.mchosting.database.object.server.DBServer;
 import net.rezxis.mchosting.database.object.server.ShopItem;
 import net.rezxis.mchosting.spigot.gui2.shop.items.item.ShopItemMenu;
 
@@ -107,7 +108,6 @@ public class ServerListener implements Listener {
 				new ShopItemMenu(player, item).delayShow();
 				return;
 			}
-				
 			item.setCMD(message);
 			RezxisMCHosting.getDBServer().update();
 			player.sendMessage(ChatColor.AQUA+"更新されました。");
@@ -119,10 +119,10 @@ public class ServerListener implements Listener {
 				player.sendMessage(ChatColor.AQUA+"キャンセルされました。");
 				return;
 			}
+			DBServer ds = RezxisMCHosting.getDBServer();
 			if (message.equalsIgnoreCase("remove")) {
-				RezxisMCHosting.getDBServer().sync();
-				RezxisMCHosting.getDBServer().setVoteCmd("");
-				RezxisMCHosting.getDBServer().update();
+				ds.setVoteCmd("");
+				ds.update();
 				player.sendMessage(ChatColor.GREEN+"投票時に実行されるコマンドは削除されました。");
 				return ;
 			}
@@ -130,9 +130,8 @@ public class ServerListener implements Listener {
 				player.sendMessage(ChatColor.AQUA+"使用できない文字が入っています。");
 				return;
 			}
-			RezxisMCHosting.getDBServer().sync();
-			RezxisMCHosting.getDBServer().setVoteCmd(message);
-			RezxisMCHosting.getDBServer().update();
+			ds.setVoteCmd(message);
+			ds.update();
 			player.sendMessage(ChatColor.GREEN+message+"に投票時実行されるコマンドは変更されました。");
 			event.setCancelled(true);
 		}

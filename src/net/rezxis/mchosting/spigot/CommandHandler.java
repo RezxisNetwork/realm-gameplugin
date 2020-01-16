@@ -5,6 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
+import net.rezxis.mchosting.database.object.server.DBServer;
 import net.rezxis.mchosting.spigot.gui2.main.RealmMenu;
 import net.rezxis.mchosting.spigot.gui2.shop.buy.RealmShopMenu;
 
@@ -13,10 +14,11 @@ public class CommandHandler {
 	public static boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		Player player = (Player)sender;
 		if (cmd.getName().equalsIgnoreCase("realm") || cmd.getName().equalsIgnoreCase("sa")) {
-			if (player.getUniqueId().toString().equals(RezxisMCHosting.getDBServer().getOwner().toString())) {
+			DBServer ds = RezxisMCHosting.getDBServer();
+			if (player.getUniqueId().toString().equals(ds.getOwner().toString())) {
 				new RealmMenu(player).delayShow();
 			} else {
-				if (RezxisMCHosting.getDBServer().getShop().getItems().size() == 0) {
+				if (ds.getShop().getItems().size() == 0) {
 					player.sendMessage(ChatColor.RED+"Shopにアイテムが売られていません！");
 					return true;
 				}

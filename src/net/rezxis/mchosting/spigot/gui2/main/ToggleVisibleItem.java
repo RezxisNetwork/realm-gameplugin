@@ -44,7 +44,6 @@ public class ToggleVisibleItem extends GUIItem {
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
 		DBServer server = RezxisMCHosting.getDBServer();
-		server.sync();
 		server.setVisible(!server.isVisible());
 		server.update();
 		return GUIAction.UPDATE;

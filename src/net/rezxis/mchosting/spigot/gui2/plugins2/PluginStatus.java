@@ -12,7 +12,6 @@ import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
-import net.rezxis.mchosting.spigot.RezxisMCHosting;
 
 public class PluginStatus extends GUIItem {
 	

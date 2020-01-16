@@ -9,13 +9,14 @@ import org.java_websocket.handshake.ServerHandshake;
 
 import com.google.gson.Gson;
 
+import net.rezxis.mchosting.database.object.server.DBServer;
+import net.rezxis.mchosting.database.object.server.ServerStatus;
 import net.rezxis.mchosting.network.ClientHandler;
 import net.rezxis.mchosting.network.packet.Packet;
 import net.rezxis.mchosting.network.packet.PacketType;
 import net.rezxis.mchosting.network.packet.ServerType;
 import net.rezxis.mchosting.network.packet.sync.SyncAuthSocketPacket;
 import net.rezxis.mchosting.network.packet.sync.SyncServerStarted;
-import net.rezxis.mchosting.spigot.tasks.ShutdownVMHook;
 
 public class WSClientHandler implements ClientHandler {
 
@@ -26,10 +27,13 @@ public class WSClientHandler implements ClientHandler {
 	@Override
 	public void onOpen(ServerHandshake handshakedata) {
 		HashMap<String,String> map = new HashMap<>();
+		DBServer ds = RezxisMCHosting.getDBServer();
+		ds.setStatus(ServerStatus.RUNNING);
+		ds.update();
 		map.put("port", String.valueOf(Bukkit.getPort()));
-		map.put("id",String.valueOf(RezxisMCHosting.getDBServer().getId()));
+		map.put("id",String.valueOf(ds.getId()));
 		RezxisMCHosting.getConn().send(gson.toJson(new SyncAuthSocketPacket(ServerType.GAME, map)));
-		RezxisMCHosting.getConn().send(gson.toJson(new SyncServerStarted(RezxisMCHosting.getDBServer().getOwner().toString())));
+		RezxisMCHosting.getConn().send(gson.toJson(new SyncServerStarted(ds.getOwner().toString())));
 		if (!initRepeat) {
 			Bukkit.getScheduler().scheduleAsyncRepeatingTask(RezxisMCHosting.instance, new Runnable() {
 				public void run() {
@@ -46,7 +50,6 @@ public class WSClientHandler implements ClientHandler {
 		initRepeat = true;
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void onMessage(String message) {
 		Packet packet = gson.fromJson(message, Packet.class);
