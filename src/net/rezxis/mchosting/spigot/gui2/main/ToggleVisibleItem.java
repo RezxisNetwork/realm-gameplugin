@@ -21,7 +21,7 @@ public class ToggleVisibleItem extends GUIItem {
 	
 	private static ItemStack getIcon() {
 		ItemStack is = null;
-		DBServer server = RezxisMCHosting.getDBServer();
+		DBServer server = RezxisMCHosting.getDBServer(false);
 		if (server.isVisible()) {
 			is = new ItemStack(Material.LIME_SHULKER_BOX);
 		} else  {
@@ -43,7 +43,7 @@ public class ToggleVisibleItem extends GUIItem {
 
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
-		DBServer server = RezxisMCHosting.getDBServer();
+		DBServer server = RezxisMCHosting.getDBServer(false);
 		server.setVisible(!server.isVisible());
 		server.update();
 		return GUIAction.UPDATE;

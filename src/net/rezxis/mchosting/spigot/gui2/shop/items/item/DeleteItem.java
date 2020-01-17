@@ -33,7 +33,7 @@ public class DeleteItem extends GUIItem {
 
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
-		DBServer server = RezxisMCHosting.getDBServer();
+		DBServer server = RezxisMCHosting.getDBServer(false);
 		server.getShop().removeItem(item);
 		server.update();
 		new ShopMenu((Player) e.getWhoClicked()).delayShow();

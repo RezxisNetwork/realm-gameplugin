@@ -46,7 +46,7 @@ public class AddItem extends GUIItem {
 						return AnvilGUI.Response.close();
 					if (text.equalsIgnoreCase(""))
 						return AnvilGUI.Response.close();
-					DBServer server = RezxisMCHosting.getDBServer();
+					DBServer server = RezxisMCHosting.getDBServer(false);
 					
 					for (ShopItem item : server.getShop().getItems()) {
 						if (item.getName().equalsIgnoreCase(text)) {

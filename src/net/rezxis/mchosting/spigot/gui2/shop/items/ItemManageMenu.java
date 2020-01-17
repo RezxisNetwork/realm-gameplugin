@@ -23,7 +23,7 @@ public class ItemManageMenu extends GUIWindow {
 	@Override
 	public HashMap<Integer, GUIItem> getOptions() {
 		HashMap<Integer, GUIItem> map = new HashMap<>();
-		DBServer server = RezxisMCHosting.getDBServer();
+		DBServer server = RezxisMCHosting.getDBServer(false);
 		ArrayList<ShopItem> items = server.getShop().getItems();
 		if (items.size() > 21*page)
 			setItem(8,5, new NextPageItem(page), map);

@@ -17,7 +17,7 @@ public class ShutdownTask extends BukkitRunnable {
 		if (count > 5) {
 			RezxisMCHosting.getConn().send(
 					new Gson().toJson(
-							new SyncStopServer(RezxisMCHosting.getDBServer().getOwner().toString())
+							new SyncStopServer(RezxisMCHosting.getDBServer(false).getOwner().toString())
 							)
 					);
 			return;

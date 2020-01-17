@@ -14,7 +14,7 @@ public class CommandHandler {
 	public static boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		Player player = (Player)sender;
 		if (cmd.getName().equalsIgnoreCase("realm") || cmd.getName().equalsIgnoreCase("sa")) {
-			DBServer ds = RezxisMCHosting.getDBServer();
+			DBServer ds = RezxisMCHosting.getDBServer(false);
 			if (player.getUniqueId().toString().equals(ds.getOwner().toString())) {
 				new RealmMenu(player).delayShow();
 			} else {

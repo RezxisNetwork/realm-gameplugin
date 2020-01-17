@@ -45,7 +45,7 @@ public class RenameItem extends GUIItem {
 				new ShopItemMenu(pl,item).delayShow();
 				return AnvilGUI.Response.close();
 			}
-			DBServer server = RezxisMCHosting.getDBServer();
+			DBServer server = RezxisMCHosting.getDBServer(false);
 			text = text.replace("&", "§");
 			for (ShopItem item : server.getShop().getItems()) {
 				if (item.getName().equalsIgnoreCase(text)) {

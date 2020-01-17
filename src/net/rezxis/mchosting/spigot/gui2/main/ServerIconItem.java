@@ -17,7 +17,7 @@ import net.rezxis.mchosting.spigot.RezxisMCHosting;
 public class ServerIconItem extends GUIItem {
 	
 	public ServerIconItem() {
-		super(getIcon(RezxisMCHosting.getDBServer()));
+		super(getIcon(RezxisMCHosting.getDBServer(false)));
 	}
 	
 	private static ItemStack getIcon(DBServer server) {
@@ -39,7 +39,7 @@ public class ServerIconItem extends GUIItem {
 			player.sendMessage(ChatColor.RED+"アイテムを手に持ってください。");
 			return GUIAction.NO_ACTION;
 		}
-		DBServer server = RezxisMCHosting.getDBServer();
+		DBServer server = RezxisMCHosting.getDBServer(false);
 		server.setIcon(player.getItemInHand().getType().name());
 		server.update();
 		player.sendMessage(ChatColor.AQUA+"アイコンを変更しました！");

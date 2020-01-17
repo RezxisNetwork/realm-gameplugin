@@ -25,7 +25,7 @@ public class ChangeVoteListener extends GUIItem {
 		ItemMeta im = is.getItemMeta();
 		im.setDisplayName(ChatColor.GREEN+"投票時に実行されるコマンド");
 		ArrayList<String> lore = new ArrayList<>();
-		lore.add(ChatColor.GREEN+RezxisMCHosting.getDBServer().getVoteCmd());
+		lore.add(ChatColor.GREEN+RezxisMCHosting.getDBServer(false).getVoteCmd());
 		lore.add(ChatColor.GREEN+"投票時に実行されるコマンドを変更します。");
 		lore.add(ChatColor.RED+"cancelで変更前に戻します。");
 		lore.add(ChatColor.RED+"removeで削除します。");

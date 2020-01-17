@@ -34,7 +34,7 @@ public class ServerListener implements Listener {
 	
 	@EventHandler
 	public void onKick(PlayerKickEvent event) {
-		if (event.getPlayer().getUniqueId().equals(RezxisMCHosting.getDBServer().getOwner())) {
+		if (event.getPlayer().getUniqueId().equals(RezxisMCHosting.getDBServer(false).getOwner())) {
 			event.getPlayer().sendMessage(ChatColor.RED+"あなたはkickされました。 : "+event.getReason());
 			event.setCancelled(true);
 		}
@@ -46,7 +46,7 @@ public class ServerListener implements Listener {
 	
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void onLogin(PlayerLoginEvent event) {
-		if (event.getPlayer().getUniqueId().equals(RezxisMCHosting.getDBServer().getOwner())) {
+		if (event.getPlayer().getUniqueId().equals(RezxisMCHosting.getDBServer(false).getOwner())) {
 			if (event.getResult() != Result.ALLOWED) {
 				event.getPlayer().sendMessage(ChatColor.RED+"あなたは接続拒否されました。 : "+event.getKickMessage());
 			}
@@ -109,7 +109,7 @@ public class ServerListener implements Listener {
 				return;
 			}
 			item.setCMD(message);
-			RezxisMCHosting.getDBServer().update();
+			RezxisMCHosting.getDBServer(false).update();
 			player.sendMessage(ChatColor.AQUA+"更新されました。");
 			new ShopItemMenu(player, item).delayShow();
 		} else if (vcmd.contains(player.getUniqueId())) {
@@ -119,7 +119,7 @@ public class ServerListener implements Listener {
 				player.sendMessage(ChatColor.AQUA+"キャンセルされました。");
 				return;
 			}
-			DBServer ds = RezxisMCHosting.getDBServer();
+			DBServer ds = RezxisMCHosting.getDBServer(false);
 			if (message.equalsIgnoreCase("remove")) {
 				ds.setVoteCmd("");
 				ds.update();

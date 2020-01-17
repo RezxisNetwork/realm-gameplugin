@@ -12,6 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.player.DBPlayer;
+import net.rezxis.mchosting.database.object.server.DBServer;
 import net.rezxis.mchosting.database.object.server.ShopItem;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
@@ -51,8 +52,9 @@ public class MenuShopItem extends GUIItem {
 		}
 		dp.setCoin(dp.getCoin() - item.getPrice());
 		dp.update();
+		DBServer s = RezxisMCHosting.getDBServer(false);
 		item.setEarned(item.getEarned()+item.getPrice());
-		RezxisMCHosting.getDBServer().update();
+		s.update();
 		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), item.getCMD().replace("[player]", player.getName()));
 		player.sendMessage(item.getName()+ChatColor.GREEN+"を購入しました。");
 		return GUIAction.UPDATE;

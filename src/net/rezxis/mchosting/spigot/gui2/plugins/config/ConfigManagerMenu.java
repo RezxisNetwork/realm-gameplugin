@@ -28,7 +28,7 @@ public class ConfigManagerMenu extends GUIWindow {
 	public HashMap<Integer, GUIItem> getOptions() {
 		HashMap<Integer, GUIItem> map = new HashMap<>();
 		map.put(0, new ItemBack(back));
-		boolean managable = Tables.getPTable().get(RezxisMCHosting.getDBServer().getOwner()).getRank().getPluginUpload();
+		boolean managable = Tables.getPTable().get(RezxisMCHosting.getDBServer(false).getOwner()).getRank().getPluginUpload();
 		int i = 1;
 		if (!isRoot) {
 			map.put(1, new DeleteDirectoryItem(file));

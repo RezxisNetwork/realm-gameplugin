@@ -27,7 +27,7 @@ public class WSClientHandler implements ClientHandler {
 	@Override
 	public void onOpen(ServerHandshake handshakedata) {
 		HashMap<String,String> map = new HashMap<>();
-		DBServer ds = RezxisMCHosting.getDBServer();
+		DBServer ds = RezxisMCHosting.getDBServer(true);
 		ds.setStatus(ServerStatus.RUNNING);
 		ds.update();
 		map.put("port", String.valueOf(Bukkit.getPort()));

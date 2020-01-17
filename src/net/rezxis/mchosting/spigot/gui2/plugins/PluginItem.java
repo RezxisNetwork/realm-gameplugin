@@ -52,7 +52,7 @@ public class PluginItem extends GUIItem {
 
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
-		DBServer ds = RezxisMCHosting.getDBServer();
+		DBServer ds = RezxisMCHosting.getDBServer(false);
 		ArrayList<String> list = ds.getPlugins();
 		if (ds.getPlugins().contains(plugin.getName())) {
 			list.remove(plugin.getName());

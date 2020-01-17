@@ -28,7 +28,7 @@ private DBPlugin plugin;
 	private static ItemStack getIcon(DBPlugin plugin) {
 		ItemStack is;
 		ChatColor c;
-		if (RezxisMCHosting.getDBServer().getPlugins().contains(plugin.getName())) {
+		if (RezxisMCHosting.getDBServer(false).getPlugins().contains(plugin.getName())) {
 			is = new ItemStack(Material.INK_SACK,1 , DyeColor.LIME.getDyeData());
 			c = ChatColor.GREEN;
 		} else {
@@ -52,7 +52,7 @@ private DBPlugin plugin;
 
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
-		DBServer ds = RezxisMCHosting.getDBServer();
+		DBServer ds = RezxisMCHosting.getDBServer(false);
 		ArrayList<String> list = ds.getPlugins();
 		if (ds.getPlugins().contains(plugin.getName())) {
 			list.remove(plugin.getName());

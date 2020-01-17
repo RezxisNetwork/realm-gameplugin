@@ -79,8 +79,10 @@ public class RezxisMCHosting extends JavaPlugin {
 		}
 	}
 	
-	public static DBServer getDBServer() {
-		me.sync();
+	public static DBServer getDBServer(boolean sync) {
+		if (sync) {
+			me.sync();
+		}
 		return me;
 	}
 	

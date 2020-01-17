@@ -27,7 +27,7 @@ public class MotdItem extends GUIItem {
 		ItemMeta im = is.getItemMeta();
 		im.setDisplayName(ChatColor.GREEN+"MOTDを変更");
 		ArrayList<String> lore = new ArrayList<String>();
-		lore.add(RezxisMCHosting.getDBServer().getMotd());
+		lore.add(RezxisMCHosting.getDBServer(false).getMotd());
 		im.setLore(lore);
 		is.setItemMeta(im);
 		return is;
@@ -45,7 +45,7 @@ public class MotdItem extends GUIItem {
 					if (text == null) {
 						return AnvilGUI.Response.text("Motdを入れてください。");
 					}
-					DBServer server = RezxisMCHosting.getDBServer();
+					DBServer server = RezxisMCHosting.getDBServer(false);
 					server.setMotd(text.replace("&", "§"));
 					server.update();
 					pl.sendMessage(ChatColor.GREEN+"変更されました。");

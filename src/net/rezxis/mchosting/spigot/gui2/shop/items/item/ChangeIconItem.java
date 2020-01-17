@@ -43,7 +43,7 @@ public class ChangeIconItem extends GUIItem {
 			return GUIAction.NO_ACTION;
 		}
 		item.setItemType(player.getItemInHand().getType().name());
-		RezxisMCHosting.getDBServer().update();
+		RezxisMCHosting.getDBServer(false).update();
 		player.sendMessage(ChatColor.AQUA+"アイコンを変更しました！");
 		return GUIAction.UPDATE;
 	}

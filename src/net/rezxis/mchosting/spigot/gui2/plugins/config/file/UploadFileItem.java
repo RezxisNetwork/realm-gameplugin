@@ -45,7 +45,7 @@ public class UploadFileItem extends GUIItem {
 	@SuppressWarnings("deprecation")
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
-		boolean manager = Tables.getPTable().get(RezxisMCHosting.getDBServer().getOwner()).getRank().getPluginUpload();
+		boolean manager = Tables.getPTable().get(RezxisMCHosting.getDBServer(false).getOwner()).getRank().getPluginUpload();
 		if (!manager) {
 			Bukkit.getScheduler().scheduleAsyncDelayedTask(RezxisMCHosting.instance, new Runnable() {
 				public void run() {

@@ -52,7 +52,7 @@ public class ChangePriceItem extends GUIItem {
 					return AnvilGUI.Response.close();
 				}
 				item.setPrice(value);
-				RezxisMCHosting.getDBServer().update();
+				RezxisMCHosting.getDBServer(false).update();
 			} catch (Exception ex) {
 				pl.sendMessage(ChatColor.RED+"値段を入力してください。");
 				new ShopItemMenu(pl,item).delayShow();

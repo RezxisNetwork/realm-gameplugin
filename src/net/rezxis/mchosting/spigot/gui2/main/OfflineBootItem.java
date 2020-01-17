@@ -22,7 +22,7 @@ public class OfflineBootItem extends GUIItem {
 	
 	private static ItemStack getIcon() {
 		Material m = null;
-		DBPlayer player = Tables.getPTable().get(RezxisMCHosting.getDBServer().getOwner());
+		DBPlayer player = Tables.getPTable().get(RezxisMCHosting.getDBServer(false).getOwner());
 		if (player.isOfflineBoot()) {
 			m = Material.TORCH;
 		} else {
@@ -45,7 +45,7 @@ public class OfflineBootItem extends GUIItem {
 
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
-		DBPlayer player = Tables.getPTable().get(RezxisMCHosting.getDBServer().getOwner());
+		DBPlayer player = Tables.getPTable().get(RezxisMCHosting.getDBServer(false).getOwner());
 		if (!player.getRank().getOfflineBoot()) {
 			e.getWhoClicked().sendMessage(ChatColor.RED+"Rankが必要です。");
 			return GUIAction.NO_ACTION;

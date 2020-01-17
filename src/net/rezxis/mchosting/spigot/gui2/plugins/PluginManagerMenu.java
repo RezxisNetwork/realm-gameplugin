@@ -43,7 +43,7 @@ public class PluginManagerMenu extends GUIWindow {
 		int sIndex = 0 + 28*(page-1);
 		int a = 0;
 		String[] str = new String[] {"REZXISMCHOSTING"};
-		DBServer ds = RezxisMCHosting.getDBServer();
+		DBServer ds = RezxisMCHosting.getDBServer(false);
 		for (int i = sIndex; i <= sIndex+27; i++) {
 			if (i == plugins.size())
 				break;

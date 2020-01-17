@@ -18,7 +18,7 @@ public class ShopMenu extends GUIWindow {
 	public HashMap<Integer, GUIItem> getOptions() {
 		HashMap<Integer, GUIItem> map = new HashMap<>();
 		setItem(0, new AddItem(), map);
-		if (RezxisMCHosting.getDBServer().getShop().getItems().size() != 0) {
+		if (RezxisMCHosting.getDBServer(false).getShop().getItems().size() != 0) {
 			setItem(1, new PreviewItem(), map);
 			setItem(2, new ManageItem(), map);
 		}

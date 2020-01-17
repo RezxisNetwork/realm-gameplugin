@@ -28,7 +28,7 @@ public class RealmShopMenu extends GUIWindow {
 	public HashMap<Integer, GUIItem> getOptions() {
 		HashMap<Integer,GUIItem> map = new HashMap<>();
 		setItem(0, new YourCoinItem(player), map);
-		DBServer server = RezxisMCHosting.getDBServer();
+		DBServer server = RezxisMCHosting.getDBServer(false);
 		ArrayList<ShopItem> items = server.getShop().getItems();
 		if (items.size() > 21*page)
 			setItem(8,5, new NextPageItem(page, preview), map);

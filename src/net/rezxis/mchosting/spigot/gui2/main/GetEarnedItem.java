@@ -29,7 +29,7 @@ public class GetEarnedItem extends GUIItem {
 		ArrayList<String> lore = new ArrayList<>();
 		lore.add(ChatColor.GRAY+"shopで稼いだ利益を回収します。");
 		int coin = 0;
-		for (ShopItem item : RezxisMCHosting.getDBServer().getShop().getItems()) {
+		for (ShopItem item : RezxisMCHosting.getDBServer(false).getShop().getItems()) {
 			coin += item.getEarned();
 		}
 		lore.add(ChatColor.GREEN+"利益: "+ChatColor.GOLD+ChatColor.UNDERLINE+coin+ChatColor.RESET+" "+ChatColor.GOLD+"Realm"+ChatColor.AQUA+"Coins");
@@ -41,7 +41,7 @@ public class GetEarnedItem extends GUIItem {
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
 		int coin = 0;
-		DBServer ds = RezxisMCHosting.getDBServer();
+		DBServer ds = RezxisMCHosting.getDBServer(false);
 		for (ShopItem item : ds.getShop().getItems()) {
 			coin += item.getEarned();
 			item.setEarned(0);
