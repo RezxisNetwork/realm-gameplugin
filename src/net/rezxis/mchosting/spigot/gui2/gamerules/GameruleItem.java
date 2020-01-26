@@ -45,8 +45,7 @@ public class GameruleItem extends GUIItem {
 
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
-		boolean bool = Boolean.valueOf(e.getWhoClicked().getWorld().getGameRuleValue(key));
-		e.getWhoClicked().getWorld().setGameRuleValue(key, String.valueOf(!bool));
+		e.getWhoClicked().getWorld().setGameRuleValue(key, String.valueOf(!Boolean.valueOf(e.getWhoClicked().getWorld().getGameRuleValue(key))));
 		return GUIAction.UPDATE;
 	}
 }
