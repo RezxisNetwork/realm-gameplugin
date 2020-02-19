@@ -7,6 +7,7 @@ import java.net.URI;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -48,6 +49,9 @@ public class RezxisMCHosting extends JavaPlugin {
 			loaded = true;
 			hook = new ShutdownVMHook(ws,me.getId());
 			Runtime.getRuntime().addShutdownHook(hook);
+		}
+		for (World world : getServer().getWorlds()) {
+			world.setGameRuleValue("logAdminsCommands", "false");
 		}
 		getServer().getMessenger().registerIncomingPluginChannel(this,"rezxis",new PMessageListener());
 	}
