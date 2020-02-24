@@ -51,7 +51,7 @@ public class RezxisMCHosting extends JavaPlugin {
 			Runtime.getRuntime().addShutdownHook(hook);
 		}
 		for (World world : getServer().getWorlds()) {
-			world.setGameRuleValue("logAdminsCommands", "false");
+			world.setGameRuleValue("logAdminCommands", "false");
 		}
 		getServer().getMessenger().registerIncomingPluginChannel(this,"rezxis",new PMessageListener());
 	}

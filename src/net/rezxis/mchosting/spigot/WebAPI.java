@@ -72,7 +72,7 @@ public class WebAPI {
 		.add("api_paste_name", name)
 		.add("api_paste_expire_date","10M")
 		.add("api_paste_format", "text").build();
-		Response response = client.newCall(new Request.Builder().url("https://paste.mcua.net/api/post").post(body).build()).execute();
+		Response response = client.newCall(new Request.Builder().url("https://paste.mcua.net/pbapi/paste").post(body).build()).execute();
 		ret = response.body().string();
 		return ret;
 	}
