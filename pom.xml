@@ -85,10 +85,10 @@
     	<version>4.2.2</version>
 	</dependency>
 	<dependency>
-    	<artifactId>spigot</artifactId>
-    	<groupId>rezxis</groupId>
-    	<version>0</version>
-    	<scope>provided</scope>
+		<artifactId>spigot-api</artifactId>
+		<groupId>org.spigotmc</groupId>
+		<version>1.12.2-R0.1-SNAPSHOT</version>
+		<scope>provided</scope>
 	</dependency>
   </dependencies>
 </project>
