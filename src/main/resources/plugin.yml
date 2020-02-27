@@ -1,0 +1,10 @@
+name: RezxisMCHosting
+main: net.rezxis.mchosting.spigot.RezxisMCHosting
+version: 0.2
+commands:
+  realm:
+    description: open server manager
+  realmtest:
+    description: open server manager
+  sa:
+    description: open server manager
