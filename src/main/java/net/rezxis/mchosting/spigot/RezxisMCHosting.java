@@ -52,9 +52,7 @@ public class RezxisMCHosting extends JavaPlugin {
 			hook = new ShutdownVMHook(ws,me.getId());
 			Runtime.getRuntime().addShutdownHook(hook);
 		}
-		for (World world : getServer().getWorlds()) {
-			world.setGameRuleValue("logAdminCommands", "false");
-		}
+		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "gamerule logAdminCommands false");
 		getServer().getMessenger().registerIncomingPluginChannel(this,"rezxis",new PMessageListener());
 		((DedicatedServer) MinecraftServer.getServer()).propertyManager.setProperty("resource-pack", getDBServer(true).getResource());
 	}
