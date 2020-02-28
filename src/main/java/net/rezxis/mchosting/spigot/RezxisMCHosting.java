@@ -41,7 +41,10 @@ public class RezxisMCHosting extends JavaPlugin {
 	public static ShutdownVMHook hook = null;
 	
 	public void onLoad() {
+		((Logger)LogManager.getLogger()).addFilter(new LogFilter());
 		((Logger)LogManager.getRootLogger()).addFilter(new LogFilter());
+		this.getLogger();
+		this.getLogger();
 		this.getServer().spigot().getConfig().set("commands.silent-commandblock-console", "true");
 		this.getServer().spigot().getConfig().set("commands.log", "false");
 	}
