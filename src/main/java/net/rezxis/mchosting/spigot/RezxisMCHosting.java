@@ -37,6 +37,11 @@ public class RezxisMCHosting extends JavaPlugin {
 	public static boolean reload = false;
 	public static ShutdownVMHook hook = null;
 	
+	public void onLoad() {
+		this.getServer().spigot().getConfig().set("commands.silent-commandblock-console", "true");
+		this.getServer().spigot().getConfig().set("commands.log", "false");
+	}
+	
 	@SuppressWarnings("deprecation")
 	public void onEnable() {
 		instance = this;
