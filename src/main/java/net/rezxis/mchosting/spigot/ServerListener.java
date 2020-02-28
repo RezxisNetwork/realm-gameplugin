@@ -27,6 +27,7 @@ public class ServerListener implements Listener {
 
 	public static HashMap<UUID,ShopItem> cmd = new HashMap<>();
 	public static ArrayList<UUID> vcmd = new ArrayList<>();
+	public static ArrayList<UUID> texture = new ArrayList<>();
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
@@ -109,7 +110,7 @@ public class ServerListener implements Listener {
 				return;
 			}
 			item.setCMD(message);
-			RezxisMCHosting.getDBServer(false).update();
+			RezxisMCHosting.getDBServer(true).update();
 			player.sendMessage(ChatColor.AQUA+"更新されました。");
 			new ShopItemMenu(player, item).delayShow();
 		} else if (vcmd.contains(player.getUniqueId())) {
@@ -119,7 +120,7 @@ public class ServerListener implements Listener {
 				player.sendMessage(ChatColor.AQUA+"キャンセルされました。");
 				return;
 			}
-			DBServer ds = RezxisMCHosting.getDBServer(false);
+			DBServer ds = RezxisMCHosting.getDBServer(true);
 			if (message.equalsIgnoreCase("remove")) {
 				ds.setVoteCmd("");
 				ds.update();
@@ -133,6 +134,24 @@ public class ServerListener implements Listener {
 			ds.setVoteCmd(message);
 			ds.update();
 			player.sendMessage(ChatColor.GREEN+message+"に投票時実行されるコマンドは変更されました。");
+			event.setCancelled(true);
+		} else if (texture.contains(player.getUniqueId())) {
+			String message = event.getMessage();
+			texture.remove(player.getUniqueId());
+			if (message.equalsIgnoreCase("cancel")) {
+				player.sendMessage(ChatColor.AQUA+"キャンセルされました。");
+				return;
+			}
+			DBServer ds = RezxisMCHosting.getDBServer(true);
+			if (message.equalsIgnoreCase("remove")) {
+				ds.setResource("");
+				ds.update();
+				player.sendMessage(ChatColor.GREEN+"テクスチャは削除されました。");
+				return ;
+			}
+			ds.setResource(message);
+			ds.update();
+			player.sendMessage(ChatColor.GREEN+message+"にテクスチャは変更されました。");
 			event.setCancelled(true);
 		}
 	}

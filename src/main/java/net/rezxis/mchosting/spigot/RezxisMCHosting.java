@@ -17,6 +17,8 @@ import org.bukkit.plugin.messaging.PluginMessageListener;
 import com.google.gson.Gson;
 
 import net.md_5.bungee.api.ChatColor;
+import net.minecraft.server.v1_12_R1.DedicatedServer;
+import net.minecraft.server.v1_12_R1.MinecraftServer;
 import net.rezxis.mchosting.database.Database;
 import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.server.DBServer;
@@ -54,6 +56,7 @@ public class RezxisMCHosting extends JavaPlugin {
 			world.setGameRuleValue("logAdminCommands", "false");
 		}
 		getServer().getMessenger().registerIncomingPluginChannel(this,"rezxis",new PMessageListener());
+		((DedicatedServer) MinecraftServer.getServer()).propertyManager.setProperty("resource-pack", getDBServer(true).getResource());
 	}
 	
 	public void onDisable() {

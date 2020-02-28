@@ -28,6 +28,7 @@ public class RealmMenu extends GUIWindow {
 		setItem(5, 3, new MotdItem(), map);
 		setItem(2, 4, new ConfigItem(this), map);
 		setItem(6, 4, new ShopMenuItem(), map);
+		setItem(5, 4, new TextureItem(), map);
 		setItem(4, 4, new GetEarnedItem(), map);
 		setItem(8, 5, new RestartItem(), map);
 		setItem(8, 4, new StopItem(), map);

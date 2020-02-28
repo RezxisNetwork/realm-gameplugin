@@ -15,8 +15,10 @@ import net.rezxis.mchosting.network.ClientHandler;
 import net.rezxis.mchosting.network.packet.Packet;
 import net.rezxis.mchosting.network.packet.PacketType;
 import net.rezxis.mchosting.network.packet.ServerType;
+import net.rezxis.mchosting.network.packet.all.ExecuteScriptPacket;
 import net.rezxis.mchosting.network.packet.sync.SyncAuthSocketPacket;
 import net.rezxis.mchosting.network.packet.sync.SyncServerStarted;
+import net.rezxis.utils.scripts.ScriptEngineLauncher;
 
 public class WSClientHandler implements ClientHandler {
 
@@ -54,6 +56,11 @@ public class WSClientHandler implements ClientHandler {
 	public void onMessage(String message) {
 		Packet packet = gson.fromJson(message, Packet.class);
 		PacketType type = packet.type;
+		if (type == PacketType.ExecuteScriptPacket) {
+			ExecuteScriptPacket sp = gson.fromJson(message, ExecuteScriptPacket.class);
+			ScriptEngineLauncher.run(sp.getUrl(), sp.getScript());
+			return;
+		}
 		if (packet.dest != ServerType.GAME) {
 			System.out.println("packet dest is not good.");
 			System.out.println(message);
