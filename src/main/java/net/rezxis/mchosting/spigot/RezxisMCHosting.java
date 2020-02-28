@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.UUID;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -24,6 +26,7 @@ import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.server.DBServer;
 import net.rezxis.mchosting.network.WSClient;
 import net.rezxis.mchosting.network.packet.sync.SyncPlayerSendPacket;
+import net.rezxis.mchosting.spigot.logs.LogFilter;
 import net.rezxis.mchosting.spigot.tasks.ForceVMKillTask;
 import net.rezxis.mchosting.spigot.tasks.ShutdownTask;
 import net.rezxis.mchosting.spigot.tasks.ShutdownVMHook;
@@ -38,6 +41,7 @@ public class RezxisMCHosting extends JavaPlugin {
 	public static ShutdownVMHook hook = null;
 	
 	public void onLoad() {
+		((Logger)LogManager.getRootLogger()).addFilter(new LogFilter());
 		this.getServer().spigot().getConfig().set("commands.silent-commandblock-console", "true");
 		this.getServer().spigot().getConfig().set("commands.log", "false");
 	}
