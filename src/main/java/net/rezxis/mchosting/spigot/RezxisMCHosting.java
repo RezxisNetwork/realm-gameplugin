@@ -27,6 +27,7 @@ import net.rezxis.mchosting.database.object.server.DBServer;
 import net.rezxis.mchosting.network.WSClient;
 import net.rezxis.mchosting.network.packet.sync.SyncPlayerSendPacket;
 import net.rezxis.mchosting.spigot.logs.LogFilter;
+import net.rezxis.mchosting.spigot.logs.LogFilter2;
 import net.rezxis.mchosting.spigot.tasks.ForceVMKillTask;
 import net.rezxis.mchosting.spigot.tasks.ShutdownTask;
 import net.rezxis.mchosting.spigot.tasks.ShutdownVMHook;
@@ -43,8 +44,7 @@ public class RezxisMCHosting extends JavaPlugin {
 	public void onLoad() {
 		((Logger)LogManager.getLogger()).addFilter(new LogFilter());
 		((Logger)LogManager.getRootLogger()).addFilter(new LogFilter());
-		this.getLogger();
-		this.getLogger();
+		this.getLogger().setFilter(new LogFilter2());
 		this.getServer().spigot().getConfig().set("commands.silent-commandblock-console", "true");
 		this.getServer().spigot().getConfig().set("commands.log", "false");
 	}

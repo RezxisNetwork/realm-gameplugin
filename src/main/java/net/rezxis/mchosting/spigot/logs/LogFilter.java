@@ -13,7 +13,7 @@ import org.apache.logging.log4j.message.Message;
 
 public class LogFilter implements Filter {
 
-	private ArrayList<String> hide = (ArrayList<String>) Arrays.asList(new String[] {"Playing effect ","Commandblock chain tried to "
+	public static final ArrayList<String> hide = (ArrayList<String>) Arrays.asList(new String[] {"Playing effect ","Commandblock chain tried to "
 			,"Played sound "});
 	
 	public Result checkMessage(String message) {
