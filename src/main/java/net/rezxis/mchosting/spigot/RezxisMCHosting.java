@@ -44,6 +44,7 @@ public class RezxisMCHosting extends JavaPlugin {
 	public void onLoad() {
 		this.getServer().spigot().getConfig().set("commands.silent-commandblock-console", "true");
 		this.getServer().spigot().getConfig().set("commands.log", "false");
+		
 	}
 	
 	@SuppressWarnings("deprecation")
