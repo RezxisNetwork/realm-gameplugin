@@ -21,6 +21,7 @@ public class LogFilter implements Filter {
 			if (message.contains(s))
 				return Result.DENY;
 		}
+		System.out.println("passed : "+message);
 		return Result.NEUTRAL;
 	}
 
