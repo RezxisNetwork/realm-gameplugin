@@ -65,9 +65,9 @@ public class RezxisMCHosting extends JavaPlugin {
 		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "gamerule logAdminCommands false");
 		getServer().getMessenger().registerIncomingPluginChannel(this,"rezxis",new PMessageListener());
 		//((DedicatedServer) MinecraftServer.getServer()).propertyManager.setProperty("resource-pack", getDBServer(true).getResource());
-		((Logger)LogManager.getLogger()).addFilter(new LogFilter());
+		//((Logger)LogManager.getLogger()).addFilter(new LogFilter());
 		((Logger)LogManager.getRootLogger()).addFilter(new LogFilter());
-		java.util.logging.Logger.getAnonymousLogger().setFilter(new LogFilter2());
+		//java.util.logging.Logger.getAnonymousLogger().setFilter(new LogFilter2());
 	}
 	
 	public void onDisable() {
