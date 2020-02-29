@@ -62,12 +62,15 @@ public class RezxisMCHosting extends JavaPlugin {
 			hook = new ShutdownVMHook(ws,me.getId());
 			Runtime.getRuntime().addShutdownHook(hook);
 		}
-		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "gamerule logAdminCommands false");
+		for (World world : Bukkit.getWorlds()) {
+			world.setGameRuleValue("logAdminCommands", "false");
+		}
 		getServer().getMessenger().registerIncomingPluginChannel(this,"rezxis",new PMessageListener());
 		//((DedicatedServer) MinecraftServer.getServer()).propertyManager.setProperty("resource-pack", getDBServer(true).getResource());
-		((Logger)LogManager.getLogger()).addFilter(new LogFilter());
+		//((Logger)LogManager.getLogger()).addFilter(new LogFilter());
 		//((Logger)LogManager.getRootLogger()).addFilter(new LogFilter());
-		//java.util.logging.Logger.getAnonymousLogger().setFilter(new LogFilter2());
+		getLogger().setFilter(new LogFilter2());
+		java.util.logging.Logger.getGlobal().setFilter(new LogFilter2());
 	}
 	
 	public void onDisable() {
