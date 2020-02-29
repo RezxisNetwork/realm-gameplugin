@@ -66,7 +66,7 @@ public class RezxisMCHosting extends JavaPlugin {
 		((DedicatedServer) MinecraftServer.getServer()).propertyManager.setProperty("resource-pack", getDBServer(true).getResource());
 		((Logger)LogManager.getLogger()).addFilter(new LogFilter());
 		((Logger)LogManager.getRootLogger()).addFilter(new LogFilter());
-		this.getLogger().setFilter(new LogFilter2());
+		java.util.logging.Logger.getGlobal().setFilter(new LogFilter2());
 	}
 	
 	public void onDisable() {
