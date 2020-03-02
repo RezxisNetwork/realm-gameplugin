@@ -11,7 +11,6 @@ public class LogFilter2 implements Filter {
 			if (record.getMessage().contains(s))
 				return false;
 		}
-		System.out.println("passed : "+record.getMessage());
 		return true;
 	}
 
