@@ -110,12 +110,8 @@ public class ServerListener implements Listener {
 				new ShopItemMenu(player, item).delayShow();
 				return;
 			}
-			DBServer ds = RezxisMCHosting.getDBServer(true);
-			DBShop dbShop = ds.getShop();
-			dbShop.removeItem(item);
+			DBServer ds = RezxisMCHosting.getDBServer(false);
 			item.setCMD(message);
-			dbShop.addItem(item);
-			ds.setShop(dbShop);
 			ds.update();
 			player.sendMessage(ChatColor.AQUA+"更新されました。");
 			new ShopItemMenu(player, item).delayShow();
