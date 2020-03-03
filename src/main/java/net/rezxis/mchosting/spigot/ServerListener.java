@@ -97,8 +97,8 @@ public class ServerListener implements Listener {
 		Player player = event.getPlayer();
 		if (cmd.containsKey(player.getUniqueId())) {
 			event.setCancelled(true);
-			ShopItem item = cmd.get(player.getUniqueId());
 			cmd.remove(player.getUniqueId());
+			ShopItem item = cmd.get(player.getUniqueId());
 			String message = event.getMessage();
 			if (message.equalsIgnoreCase("cancel")) {
 				player.sendMessage(ChatColor.AQUA+"キャンセルされました。");
@@ -111,7 +111,11 @@ public class ServerListener implements Listener {
 				return;
 			}
 			DBServer ds = RezxisMCHosting.getDBServer(true);
+			DBShop dbShop = ds.getShop();
+			dbShop.removeItem(item);
 			item.setCMD(message);
+			dbShop.addItem(item);
+			ds.setShop(dbShop);
 			ds.update();
 			player.sendMessage(ChatColor.AQUA+"更新されました。");
 			new ShopItemMenu(player, item).delayShow();
