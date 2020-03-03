@@ -110,9 +110,8 @@ public class ServerListener implements Listener {
 				new ShopItemMenu(player, item).delayShow();
 				return;
 			}
-			DBServer ds = RezxisMCHosting.getDBServer(false);
 			item.setCMD(message);
-			ds.update();
+			RezxisMCHosting.getDBServer(false).update();
 			player.sendMessage(ChatColor.AQUA+"更新されました。");
 			new ShopItemMenu(player, item).delayShow();
 		} else if (vcmd.contains(player.getUniqueId())) {
