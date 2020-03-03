@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import net.rezxis.mchosting.database.object.server.DBShop;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -109,8 +110,9 @@ public class ServerListener implements Listener {
 				new ShopItemMenu(player, item).delayShow();
 				return;
 			}
+			DBServer ds = RezxisMCHosting.getDBServer(true);
 			item.setCMD(message);
-			RezxisMCHosting.getDBServer(true).update();
+			ds.update();
 			player.sendMessage(ChatColor.AQUA+"更新されました。");
 			new ShopItemMenu(player, item).delayShow();
 		} else if (vcmd.contains(player.getUniqueId())) {
