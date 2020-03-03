@@ -97,8 +97,8 @@ public class ServerListener implements Listener {
 		Player player = event.getPlayer();
 		if (cmd.containsKey(player.getUniqueId())) {
 			event.setCancelled(true);
-			cmd.remove(player.getUniqueId());
 			ShopItem item = cmd.get(player.getUniqueId());
+			cmd.remove(player.getUniqueId());
 			String message = event.getMessage();
 			if (message.equalsIgnoreCase("cancel")) {
 				player.sendMessage(ChatColor.AQUA+"キャンセルされました。");
