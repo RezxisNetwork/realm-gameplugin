@@ -26,7 +26,7 @@ public class ChangeIconItem extends GUIItem {
 	private static ItemStack getIcon(ShopItem item) {
 		ItemStack is = new ItemStack(Material.valueOf(item.getItemType()));
 		ItemMeta im = is.getItemMeta();
-		im.setDisplayName(ChatColor.GREEN+"サーバーアイコンを変更");
+		im.setDisplayName(ChatColor.GREEN+"アイコンを変更");
 		ArrayList<String> lore = new ArrayList<>();
 		lore.add(ChatColor.AQUA+"アイコンにしたいアイテムを手に持ってください");
 		im.setLore(lore);
