@@ -19,7 +19,7 @@ import okhttp3.Response;
 
 public class WebAPI {
 
-	private static String key = "8Kzvb4iW76blMJWl";
+	private static String key = "YCNaCfoaEwTaVXLH";
 	private static OkHttpClient client;
 	
 	static {
