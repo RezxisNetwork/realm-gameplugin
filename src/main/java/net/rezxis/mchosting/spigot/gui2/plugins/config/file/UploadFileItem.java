@@ -16,6 +16,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.internal.DBFile;
 import net.rezxis.mchosting.database.object.internal.DBFile.Type;
+import net.rezxis.mchosting.database.object.server.DBServer.GameType;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.gui.GUIWindow;
@@ -45,8 +46,7 @@ public class UploadFileItem extends GUIItem {
 	@SuppressWarnings("deprecation")
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
-		boolean manager = Tables.getPTable().get(RezxisMCHosting.getDBServer(false).getOwner()).getRank().getPluginUpload();
-		if (!manager) {
+		if (RezxisMCHosting.getDBServer(false).getType() == GameType.NORMAL) {
 			Bukkit.getScheduler().scheduleAsyncDelayedTask(RezxisMCHosting.instance, new Runnable() {
 				public void run() {
 				new AnvilGUI.Builder()
