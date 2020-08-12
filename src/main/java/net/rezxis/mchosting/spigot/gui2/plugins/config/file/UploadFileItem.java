@@ -85,7 +85,7 @@ public class UploadFileItem extends GUIItem {
 		} else {
 			DBFile dfile = Tables.getFTable().get2(e.getWhoClicked().getUniqueId().toString(), Type.PLUGIN);
 			if (dfile == null) {
-				dfile = new DBFile("", e.getWhoClicked().getUniqueId().toString(),
+				dfile = new DBFile(e.getWhoClicked().getUniqueId().toString(),
 						RandomStringUtils.randomAlphabetic(10),
 						false, new Date(), Type.PLUGIN);
 				Tables.getFTable().insert(dfile);
