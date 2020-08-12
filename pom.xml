@@ -11,6 +11,7 @@
         <configuration>
           <source>1.8</source>
           <target>1.8</target>
+          <encoding>UTF-8</encoding>
         </configuration>
       </plugin>
       <plugin>
@@ -87,9 +88,8 @@
 	<dependency>
 		<artifactId>spigot</artifactId>
 		<groupId>spigot</groupId>
-		<version>0</version>
-		<scope>system</scope>
-		<systemPath>${basedir}/spigot.jar</systemPath>
+		<version>1</version>
+		<scope>provided</scope>
 	</dependency>
   </dependencies>
 </project>
