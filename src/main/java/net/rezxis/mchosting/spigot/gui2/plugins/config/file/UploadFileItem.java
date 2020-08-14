@@ -38,7 +38,7 @@ public class UploadFileItem extends GUIItem {
 	private static ItemStack getIcon() {
 		ItemStack is = new ItemStack(Material.WEB);
 		ItemMeta im = is.getItemMeta();
-		im.setDisplayName(ChatColor.AQUA+"Upload this file to server");
+		im.setDisplayName(ChatColor.AQUA+"アップロード");
 		is.setItemMeta(im);
 		return is;
 	}
@@ -59,8 +59,8 @@ public class UploadFileItem extends GUIItem {
 						if (text.contains("paste.mcua.net/raw/")) {
 							link = text;
 						} else {
-							if (text.contains("paste.mcua.net/")) {
-								link = "https://paste.mcua.net/raw/"+text.split("paste.mcua.net/")[1];
+							if (text.contains("paste.mcua.net/v/")) {
+								link = text.replace("/v/", "/raw/");
 							} else {
 								pl.sendMessage(ChatColor.RED+"https://paste.mcua.net を使ってください。");
 								return AnvilGUI.Response.close();

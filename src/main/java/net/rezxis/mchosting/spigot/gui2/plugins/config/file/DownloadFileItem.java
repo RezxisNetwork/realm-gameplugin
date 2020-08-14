@@ -29,7 +29,7 @@ public class DownloadFileItem extends GUIItem {
 	private static ItemStack getIcon() {
 		ItemStack is = new ItemStack(Material.BOOK);
 		ItemMeta im = is.getItemMeta();
-		im.setDisplayName(ChatColor.AQUA+"Download this file from server");
+		im.setDisplayName(ChatColor.AQUA+"ダウンロード");
 		is.setItemMeta(im);
 		return is;
 	}
@@ -40,10 +40,10 @@ public class DownloadFileItem extends GUIItem {
 		new Thread(()->{
 			try {
 				String ret = WebAPI.upload(FileUtils.readFileToString(file, "UTF-8"), file.getName()+"-"+e.getWhoClicked().getName());
-				e.getWhoClicked().sendMessage("Uploaded : "+ret);
+				e.getWhoClicked().sendMessage("アップロードされました : "+ret);
 			} catch (IOException ex) {
 				ex.printStackTrace();
-				e.getWhoClicked().sendMessage("Something went to worng");
+				e.getWhoClicked().sendMessage("Error");
 			}
 			
 		}).start();
