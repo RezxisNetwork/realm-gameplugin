@@ -3,6 +3,8 @@ package net.rezxis.mchosting.spigot.gui2.ranks;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -59,8 +61,7 @@ public class GoldRankItem extends GUIItem {
 		}
 		player.setRank(rank);
 		player.setCoin(player.getCoin()-price);
-		Calendar calendar = Calendar.getInstance();
-		calendar.setTime(new Date());
+		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Japan"),Locale.JAPANESE);
 		calendar.add(Calendar.WEEK_OF_MONTH, 1);
 		player.setRankExpire(calendar.getTime());
 		player.update();
