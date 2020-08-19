@@ -47,7 +47,7 @@ public class ServerListener implements Listener {
 	@EventHandler
 	public void onLeave(PlayerQuitEvent event) {
 		DBServer s = RezxisMCHosting.getDBServer(true);
-		s.setPlayers(Bukkit.getOnlinePlayers().size());
+		s.setPlayers(Bukkit.getOnlinePlayers().size()-1);
 		s.update();
 	}
 	
