@@ -3,8 +3,7 @@ package net.rezxis.mchosting.spigot;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
-
-import net.rezxis.mchosting.database.object.server.DBShop;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -32,6 +31,9 @@ public class ServerListener implements Listener {
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
+		DBServer s = RezxisMCHosting.getDBServer(true);
+		s.setPlayers(Bukkit.getOnlinePlayers().size());
+		s.update();
 	}
 	
 	@EventHandler
@@ -44,6 +46,9 @@ public class ServerListener implements Listener {
 	
 	@EventHandler
 	public void onLeave(PlayerQuitEvent event) {
+		DBServer s = RezxisMCHosting.getDBServer(true);
+		s.setPlayers(Bukkit.getOnlinePlayers().size());
+		s.update();
 	}
 	
 	@EventHandler(priority = EventPriority.LOWEST)
