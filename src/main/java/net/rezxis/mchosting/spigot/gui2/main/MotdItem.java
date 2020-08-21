@@ -28,8 +28,8 @@ public class MotdItem extends GUIItem {
 		im.setDisplayName(ChatColor.GREEN+"MOTDを変更");
 		ArrayList<String> lore = new ArrayList<String>();
 		String loree = RezxisMCHosting.getDBServer(false).getMotd();
-		if (loree.contains("\n")) {
-			for (String line : loree.split("\n")) {
+		if (loree.contains("\\n")) {
+			for (String line : loree.split("\\n")) {
 				lore.add(line);
 			}
 		} else {
