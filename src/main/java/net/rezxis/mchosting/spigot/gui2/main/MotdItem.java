@@ -27,7 +27,14 @@ public class MotdItem extends GUIItem {
 		ItemMeta im = is.getItemMeta();
 		im.setDisplayName(ChatColor.GREEN+"MOTDを変更");
 		ArrayList<String> lore = new ArrayList<String>();
-		lore.add(RezxisMCHosting.getDBServer(false).getMotd());
+		String loree = RezxisMCHosting.getDBServer(false).getMotd();
+		if (loree.contains("\n")) {
+			for (String line : loree.split("\n")) {
+				lore.add(line);
+			}
+		} else {
+			lore.add(loree);
+		}
 		im.setLore(lore);
 		is.setItemMeta(im);
 		return is;
