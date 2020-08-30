@@ -51,9 +51,9 @@ public class RezxisMCHosting extends JavaPlugin {
 	public void onEnable() {
 		instance = this;
 		Bukkit.getPluginManager().registerEvents(new ServerListener(),this);
-		if (!loaded) {
+		/*if (!loaded) {
 			Database.init(System.getenv("db_host"),System.getenv("db_user"),System.getenv("db_pass"),System.getenv("db_port"),System.getenv("db_name"));
-		}
+		}*/
 		me = Tables.getSTable().get(UUID.fromString(System.getenv("sowner")));
 		if (!loaded) {
 			initWS();
