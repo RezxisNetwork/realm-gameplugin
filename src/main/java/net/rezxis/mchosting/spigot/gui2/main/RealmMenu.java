@@ -19,7 +19,7 @@ public class RealmMenu extends GUIWindow {
 		HashMap<Integer, GUIItem> map = new HashMap<>();
 		setItem(0, 0, new ToggleVisibleItem(), map);
 		setItem(0, 1, new OfflineBootItem(), map);
-		setItem(0, 8, new DirectConnectItem(), map);
+		setItem(8, 0, new DirectConnectItem(), map);
 		setItem(4, 0, new OpenBuyRankMenu(), map);
 		setItem(2, 2, new ResetOPItem(), map);
 		setItem(4, 2, new PluginManagerItem(this), map);
