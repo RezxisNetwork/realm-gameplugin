@@ -28,6 +28,7 @@ public class ServerListener implements Listener {
 	public static HashMap<UUID,ShopItem> cmd = new HashMap<>();
 	public static ArrayList<UUID> vcmd = new ArrayList<>();
 	public static ArrayList<UUID> texture = new ArrayList<>();
+	public static ArrayList<UUID> direct = new ArrayList<>();
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent event) {
@@ -160,6 +161,21 @@ public class ServerListener implements Listener {
 			ds.update();
 			player.sendMessage(ChatColor.GREEN+message+"にテクスチャは変更されました。");
 			event.setCancelled(true);
+		} else if (direct.contains(player.getUniqueId())) {
+			direct.remove(player.getUniqueId());
+			String msg = event.getMessage();
+			if (msg.length() <= 4) {
+				player.sendMessage(ChatColor.RED+"5文字以上に設定してください。");
+				return;
+			}
+			if (Tables.getSTable().getServerByDirect(msg) != null) {
+				player.sendMessage(ChatColor.RED+"既に使用されています。");
+				return;
+			}
+			DBServer s = RezxisMCHosting.getDBServer(true);
+			s.setDirect(msg);
+			s.update();
+			player.sendMessage(ChatColor.GREEN+"次回の再起動以降　"+msg+".rezxis.net　で接続が可能です。");
 		}
 	}
 }

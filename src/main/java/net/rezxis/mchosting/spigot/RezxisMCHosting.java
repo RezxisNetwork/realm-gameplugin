@@ -65,7 +65,7 @@ public class RezxisMCHosting extends JavaPlugin {
 		for (World world : Bukkit.getWorlds()) {
 			world.setGameRuleValue("logAdminCommands", "false");
 		}
-		getServer().getMessenger().registerIncomingPluginChannel(this,"rezxis",new PMessageListener());
+		getServer().getMessenger().registerIncomingPluginChannel(this,"rezxis:rezxis",new PMessageListener());
 		//((DedicatedServer) MinecraftServer.getServer()).propertyManager.setProperty("resource-pack", getDBServer(true).getResource());
 		//((Logger)LogManager.getLogger()).addFilter(new LogFilter());
 		//((Logger)LogManager.getRootLogger()).addFilter(new LogFilter());
@@ -115,7 +115,7 @@ public class RezxisMCHosting extends JavaPlugin {
 
 		@Override
 		public void onPluginMessageReceived(String ch, Player player, byte[] body) {
-			if (ch.equalsIgnoreCase("rezxis")) {
+			if (ch.equalsIgnoreCase("rezxis:rezxis")) {
 				DataInputStream in = new DataInputStream(new ByteArrayInputStream(body));
 				String arg0 = null;
 				String arg1 = null;
