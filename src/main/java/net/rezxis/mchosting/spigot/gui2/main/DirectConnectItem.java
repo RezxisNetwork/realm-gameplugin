@@ -9,6 +9,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
+import net.rezxis.mchosting.database.object.server.DBServer;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;
@@ -40,6 +41,13 @@ public class DirectConnectItem extends GUIItem {
 
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
+		if (e.isShiftClick()) {
+			DBServer server = RezxisMCHosting.getDBServer(true);
+			server.setDirect("");
+			server.update();
+			e.getWhoClicked().sendMessage(ChatColor.YELLOW+"変更を適応するには再起動が必要です。");
+			return GUIAction.CLOSE;
+		}
 		Player p = (Player) e.getWhoClicked();
 		p.sendMessage(ChatColor.YELLOW+"<指定する名前>.direct.rezxis.net で接続できるようになります。");
 		p.sendMessage(ChatColor.YELLOW+"変更後再起動が必要です。");
