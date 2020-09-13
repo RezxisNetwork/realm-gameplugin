@@ -162,6 +162,7 @@ public class ServerListener implements Listener {
 			player.sendMessage(ChatColor.GREEN+message+"にテクスチャは変更されました。");
 			event.setCancelled(true);
 		} else if (direct.contains(player.getUniqueId())) {
+			event.setCancelled(true);
 			direct.remove(player.getUniqueId());
 			String msg = event.getMessage();
 			if (msg.length() <= 4) {

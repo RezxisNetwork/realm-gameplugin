@@ -31,7 +31,7 @@ public class DirectConnectItem extends GUIItem {
 			lore.add(ChatColor.GREEN+"現在のアドレス : "+s+".direct.rezxis.net");
 		}
 		lore.add(ChatColor.GREEN+"接続に使用できるアドレスを指定できます。");
-		lore.add(ChatColor.GREEN+"<指定する名前>.direct.rezxis.net　で接続できるようになります。");
+		lore.add(ChatColor.GREEN+"<指定する名前>.direct.rezxis.net で接続できるようになります。");
 		lore.add(ChatColor.RED+"シフト + クリックで無効化されます。");
 		im.setLore(lore);
 		is.setItemMeta(im);
@@ -41,7 +41,7 @@ public class DirectConnectItem extends GUIItem {
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
 		Player p = (Player) e.getWhoClicked();
-		p.sendMessage(ChatColor.YELLOW+"<指定する名前>.direct.rezxis.net　で接続できるようになります。");
+		p.sendMessage(ChatColor.YELLOW+"<指定する名前>.direct.rezxis.net で接続できるようになります。");
 		p.sendMessage(ChatColor.YELLOW+"変更後再起動が必要です。");
 		ServerListener.direct.add(e.getWhoClicked().getUniqueId());
 		return GUIAction.CLOSE;
