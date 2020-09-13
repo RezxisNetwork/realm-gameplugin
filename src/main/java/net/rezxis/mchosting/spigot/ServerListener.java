@@ -176,7 +176,7 @@ public class ServerListener implements Listener {
 			DBServer s = RezxisMCHosting.getDBServer(true);
 			s.setDirect(msg);
 			s.update();
-			player.sendMessage(ChatColor.GREEN+"次回の再起動以降　"+msg+".rezxis.net　で接続が可能です。");
+			player.sendMessage(ChatColor.GREEN+"次回の再起動以降 "+msg+".rezxis.net　で接続が可能です。");
 		}
 	}
 }
