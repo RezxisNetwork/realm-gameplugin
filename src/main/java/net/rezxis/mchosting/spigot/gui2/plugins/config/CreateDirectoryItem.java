@@ -52,7 +52,7 @@ public class CreateDirectoryItem extends GUIItem {
 					}
 			
 					new File(file,text).mkdirs();
-					new ConfigManagerMenu(pl, file, back, false).delayShow();;
+					new ConfigManagerMenu(pl, file, back, false, 0).delayShow();;
 					pl.sendMessage(ChatColor.AQUA+"作成されました");
 					return AnvilGUI.Response.close();
 				})

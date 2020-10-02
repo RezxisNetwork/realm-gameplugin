@@ -36,7 +36,7 @@ public class ConfigItem extends GUIItem {
 
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
-		new ConfigManagerMenu((Player) e.getWhoClicked(), RezxisMCHosting.instance.getDataFolder().getParentFile(), back, true).delayShow();
+		new ConfigManagerMenu((Player) e.getWhoClicked(), RezxisMCHosting.instance.getDataFolder().getParentFile(), back, true, 0).delayShow();
 		return GUIAction.CLOSE;
 	}
 }

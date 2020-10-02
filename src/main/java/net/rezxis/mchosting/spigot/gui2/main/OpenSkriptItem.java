@@ -40,7 +40,7 @@ public class OpenSkriptItem extends GUIItem {
 		}
 		File f = new File(RezxisMCHosting.instance.getDataFolder().getParentFile(),
 				"Skript/scripts/");
-		new ConfigManagerMenu((Player) e.getWhoClicked(),f,new RealmMenu((Player) e.getWhoClicked()), false).delayShow();
+		new ConfigManagerMenu((Player) e.getWhoClicked(),f,new RealmMenu((Player) e.getWhoClicked()), false, 0).delayShow();
 		return GUIAction.CLOSE;
 	}
 }

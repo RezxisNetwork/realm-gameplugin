@@ -38,7 +38,7 @@ public class DirectoryItem extends GUIItem {
 
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
-		new ConfigManagerMenu((Player) e.getWhoClicked(), file, back, false).delayShow();
+		new ConfigManagerMenu((Player) e.getWhoClicked(), file, back, false, 0).delayShow();
 		return GUIAction.CLOSE;
 	}
 }
