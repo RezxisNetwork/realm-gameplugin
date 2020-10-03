@@ -80,7 +80,7 @@ public class ConfigManagerMenu extends GUIWindow {
 		int z = from;
 		while (z < end) {
 			if (files.length > 50) {
-				if ((page != 0 && (i == 45 || i == 53)) || (page == 0 && i == 45)) {
+				if ((page != 0 && (i == 45 || i == 53)) || (page == 0 && i == 53)) {
 					i++;
 					continue;
 				}
