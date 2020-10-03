@@ -104,9 +104,16 @@ public class ConfigManagerMenu extends GUIWindow {
 			z++;
 		}
 		if (files.length > 50) {
-			if (page != 0)
+			if (page != 0) {
 				map.put(45, new BackDirectoryItem(file, back, isRoot, page));
-			if (end > files.length - 1)
+			}
+			int endi;
+			if (page == 0) {
+				endi = from + 49;
+			} else {
+				endi = from + 48;
+			}
+			if (endi > files.length - 1)
 				map.put(53, new NextDirectoryItem(file, back, isRoot, page));
 		}
 		return map;
