@@ -61,8 +61,6 @@ public class ConfigManagerMenu extends GUIWindow {
 		int end = files.length;
 		int from = 0;
 		if (page != 0) {
-			if (!managable)
-				from += 3;
 			from += 49;
 			for (int z = 0; z < page-1; z++) {
 				from += 48;
@@ -74,6 +72,8 @@ public class ConfigManagerMenu extends GUIWindow {
 			} else {
 				end = from + 48;
 			}
+			if (!managable)
+				end += 3;
 			if (end > files.length - 1) {
 				end = files.length - 1;
 			}
