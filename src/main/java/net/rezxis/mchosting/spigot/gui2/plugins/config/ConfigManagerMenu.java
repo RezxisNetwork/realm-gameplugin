@@ -69,9 +69,9 @@ public class ConfigManagerMenu extends GUIWindow {
 		}
 		if (end > 50) {
 			if (page == 0) {
-				end = from + 48;
+				end = from + 49;
 			} else {
-				end = from + 47;
+				end = from + 48;
 			}
 			if (end > files.length - 1) {
 				end = files.length - 1;
@@ -79,14 +79,13 @@ public class ConfigManagerMenu extends GUIWindow {
 		}
 		int z = from;
 		while (z < end) {
-			System.out.println(z);
 			if (files.length > 50) {
 				if ((page == 0 && (z == 45 || z == 53)) || z == 53) {
-					z++;
 					continue;
 				}
 			}
 			File f = files[z];
+			System.out.println(files[z]);
 			if (!f.getName().contains(".jar")) {
 				if (f.isDirectory()) {
 					map.put(i, new DirectoryItem(f,this));
