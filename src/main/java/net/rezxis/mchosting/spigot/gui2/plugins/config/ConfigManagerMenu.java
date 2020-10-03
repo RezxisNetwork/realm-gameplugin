@@ -113,7 +113,7 @@ public class ConfigManagerMenu extends GUIWindow {
 			} else {
 				endi = from + 48;
 			}
-			if (endi > files.length - 1)
+			if (endi <= files.length - 1)
 				map.put(53, new NextDirectoryItem(file, back, isRoot, page));
 		}
 		return map;
