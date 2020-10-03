@@ -69,9 +69,9 @@ public class ConfigManagerMenu extends GUIWindow {
 		}
 		if (end > 50) {
 			if (page == 0) {
-				end = from + 49;
-			} else {
 				end = from + 48;
+			} else {
+				end = from + 47;
 			}
 			if (end > files.length - 1) {
 				end = files.length - 1;
