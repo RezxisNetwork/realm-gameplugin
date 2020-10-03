@@ -19,7 +19,7 @@ public class ConfigManagerMenu extends GUIWindow {
 	private GUIWindow back;
 	private boolean isRoot;
 	private int page;
-	private static String[] blacklisted = new String[] {"RezxisSQLPlugin","GamePlugin","database.yml","RezxisSQL"};
+	private static String[] blacklisted = new String[] {"RezxisSQLPlugin","GamePlugin","database.yml","RezxisSQL",".jar"};
 	
 	public ConfigManagerMenu(Player player, File file, GUIWindow back, boolean isRoot, int page) {
 		super(player, "Config Manager", 6, RezxisMCHosting.instance);
@@ -49,11 +49,9 @@ public class ConfigManagerMenu extends GUIWindow {
 		ArrayList<File> fRoot = new ArrayList<>();
 		for (File ff : file.listFiles()) {
 			boolean flag = false;
-			for (String s : blacklisted) {
-				if (ff.getName().contains(s)) {
+			for (String s : blacklisted)
+				if (ff.getName().contains(s))
 					flag = true;
-				}
-			}
 			if (!flag) {
 				fRoot.add(ff);
 			}
