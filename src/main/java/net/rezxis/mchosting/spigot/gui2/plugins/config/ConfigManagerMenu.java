@@ -79,6 +79,7 @@ public class ConfigManagerMenu extends GUIWindow {
 		}
 		int z = from;
 		while (z < end) {
+			System.out.println(z);
 			if (files.length > 50) {
 				if ((page == 0 && (z == 45 || z == 53)) || z == 53) {
 					i++;
