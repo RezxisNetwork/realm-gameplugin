@@ -83,6 +83,7 @@ public class ConfigManagerMenu extends GUIWindow {
 			if (files.length > 50) {
 				if ((page == 0 && (z == 45 || z == 53)) || z == 53) {
 					i++;
+					z++;
 					continue;
 				}
 			}
