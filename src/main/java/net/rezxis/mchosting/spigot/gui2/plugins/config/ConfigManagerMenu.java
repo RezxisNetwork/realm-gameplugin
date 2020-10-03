@@ -46,6 +46,7 @@ public class ConfigManagerMenu extends GUIWindow {
 			map.put(3, new CreateFileItem(file, this));
 			i = 4;
 		}
+		
 		ArrayList<File> fRoot = new ArrayList<>();
 		for (File ff : file.listFiles()) {
 			boolean flag = false;
