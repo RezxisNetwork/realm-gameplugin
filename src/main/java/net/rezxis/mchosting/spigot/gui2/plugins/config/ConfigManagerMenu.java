@@ -69,15 +69,16 @@ public class ConfigManagerMenu extends GUIWindow {
 		}
 		if (end > 50) {
 			if (page == 0) {
-				end = from + 50;
-			} else {
 				end = from + 49;
+			} else {
+				end = from + 48;
 			}
 			if (end > files.length - 1) {
 				end = files.length - 1;
 			}
 		}
-		for (int z = from; z < end; z++) {
+		int z = from;
+		while (z < end) {
 			if (files.length > 50) {
 				if (page == 0 && (z == 45 || z == 53))
 					continue;
@@ -100,6 +101,7 @@ public class ConfigManagerMenu extends GUIWindow {
 				}
 				i++;
 			}
+			z++;
 		}
 		if (files.length > 50) {
 			if (page != 0) {
