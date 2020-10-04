@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.UUID;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.core.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -19,14 +17,10 @@ import org.bukkit.plugin.messaging.PluginMessageListener;
 import com.google.gson.Gson;
 
 import net.md_5.bungee.api.ChatColor;
-import net.minecraft.server.v1_12_R1.DedicatedServer;
-import net.minecraft.server.v1_12_R1.MinecraftServer;
-import net.rezxis.mchosting.database.Database;
 import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.server.DBServer;
 import net.rezxis.mchosting.network.WSClient;
 import net.rezxis.mchosting.network.packet.sync.SyncPlayerSendPacket;
-import net.rezxis.mchosting.spigot.logs.LogFilter;
 import net.rezxis.mchosting.spigot.logs.LogFilter2;
 import net.rezxis.mchosting.spigot.tasks.ForceVMKillTask;
 import net.rezxis.mchosting.spigot.tasks.ShutdownTask;

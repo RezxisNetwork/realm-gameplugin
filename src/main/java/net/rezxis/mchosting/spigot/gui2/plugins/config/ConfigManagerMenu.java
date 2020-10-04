@@ -2,7 +2,6 @@ package net.rezxis.mchosting.spigot.gui2.plugins.config;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import org.bukkit.entity.Player;

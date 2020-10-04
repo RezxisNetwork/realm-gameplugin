@@ -26,6 +26,7 @@ public class WebAPI {
 		client = new OkHttpClient.Builder().build();
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static void download(String url, File file, Player player) throws Exception {
 		Response res = client.newCall(new Request.Builder().header("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36")
 				.url(url).get().build()).execute();
@@ -48,6 +49,7 @@ public class WebAPI {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
 	public static void download(File file, String secret, String uuid) throws Exception {
 		String url = "http://localhost/worlds/api.php?type=download&secretKey="+secret+"&uuid="+uuid;
 		Response res = client.newCall(new Request.Builder().header("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36")

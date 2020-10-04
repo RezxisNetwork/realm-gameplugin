@@ -1,6 +1,5 @@
 package net.rezxis.mchosting.spigot.logs;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,7 +13,6 @@ import org.apache.logging.log4j.message.Message;
 
 public class LogFilter implements Filter {
 
-	@SuppressWarnings("unchecked")
 	public static final List<String> hide = (List<String>) Arrays.asList(new String[] {"Playing effect ","Commandblock chain tried to "
 			,"Played sound "});
 	
