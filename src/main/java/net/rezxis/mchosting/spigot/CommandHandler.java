@@ -6,8 +6,8 @@ import org.bukkit.entity.Player;
 
 import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.database.object.server.DBServer;
-import net.rezxis.mchosting.spigot.gui2.main.RealmMenu;
-import net.rezxis.mchosting.spigot.gui2.shop.buy.RealmShopMenu;
+import net.rezxis.mchosting.spigot.gui.main.RealmMenu;
+import net.rezxis.mchosting.spigot.gui.shop.buy.RealmShopMenu;
 
 public class CommandHandler {
 

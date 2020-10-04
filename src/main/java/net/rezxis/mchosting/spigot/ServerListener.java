@@ -21,7 +21,7 @@ import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.player.DBPlayer;
 import net.rezxis.mchosting.database.object.server.DBServer;
 import net.rezxis.mchosting.database.object.server.ShopItem;
-import net.rezxis.mchosting.spigot.gui2.shop.items.item.ShopItemMenu;
+import net.rezxis.mchosting.spigot.gui.shop.items.item.ShopItemMenu;
 
 public class ServerListener implements Listener {
 
