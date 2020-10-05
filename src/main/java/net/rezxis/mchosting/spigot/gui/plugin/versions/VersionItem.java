@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -32,6 +34,7 @@ public class VersionItem extends GUIItem {
 		String act = "";
 		String now = "";
 		DBServerPluginLink link = Tables.getSplTable().getLink(RezxisMCHosting.getDBServer(false).getId(), plugin.getName());
+		boolean flag = false;
 		if (link != null) {
 			if (link.getPlugin() == plugin.getId()) {
 				if (link.isEnabled()) {
@@ -40,11 +43,13 @@ public class VersionItem extends GUIItem {
 						c = ChatColor.GREEN;
 						now = ChatColor.GREEN+"有効";
 						act = "無効化";
+						flag = true;
 					} else {
 						is = new ItemStack(Material.INK_SACK,1 , DyeColor.ORANGE.getDyeData());
 						c = ChatColor.GOLD;
 						now = ChatColor.GREEN+"有効";
 						act = "無効化取り消し";
+						flag = true;
 					}
 				} else {
 					if (!link.isLastEnabled()) {
@@ -72,6 +77,10 @@ public class VersionItem extends GUIItem {
 			act = "有効化";
 		}
 		ItemMeta im = is.getItemMeta();
+		if (flag) {
+			im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+			im.addEnchant(Enchantment.DURABILITY, 1, true);
+		}
 		im.setDisplayName(c+plugin.getName());
 		ArrayList<String> list = new ArrayList<>();
 		list.add(ChatColor.AQUA+"依存関係-"+plugin.getDepends().size());
@@ -84,6 +93,8 @@ public class VersionItem extends GUIItem {
 		list.add(ChatColor.AQUA+"クリックで"+act);
 		im.setLore(list);
 		is.setItemMeta(im);
+		if (flag)
+			is.addEnchantment(Enchantment.DURABILITY, 1);
 		return is;
 	}
 
