@@ -28,7 +28,7 @@ public class PluginItem extends GUIItem {
 	}
 	
 	private static ItemStack getIcon(String name, boolean enabled) {
-		ItemStack is = new ItemStack(Material.CHEST);
+		ItemStack is = new ItemStack(Material.FURNACE);
 		ItemMeta im = is.getItemMeta();
 		ChatColor c;
 		if (enabled) {
