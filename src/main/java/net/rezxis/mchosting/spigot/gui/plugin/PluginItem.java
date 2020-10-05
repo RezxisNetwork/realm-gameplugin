@@ -37,10 +37,6 @@ public class PluginItem extends GUIItem {
 			c = ChatColor.RED;
 		}
 		im.setDisplayName(c+name);
-		if (enabled) {
-			im.addEnchant(Enchantment.DURABILITY, 1, true);
-			im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-		}
 		ArrayList<String> lore = new ArrayList<>();
 		lore.add(c+"状態 : "+(enabled ? "有効" : "無効"));
 		lore.add(ChatColor.AQUA+"クリックで詳細を表示。");
