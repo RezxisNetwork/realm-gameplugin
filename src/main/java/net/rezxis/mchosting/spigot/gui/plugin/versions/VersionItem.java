@@ -98,6 +98,7 @@ public class VersionItem extends GUIItem {
 						e.getWhoClicked().sendMessage(ChatColor.AQUA+"変更を反映するには再起動してください。");
 					} else {
 						link.setEnabled(true);
+						System.out.println("a");
 					}
 				} else {
 					if (!link.isLastEnabled()) {
@@ -105,6 +106,7 @@ public class VersionItem extends GUIItem {
 						e.getWhoClicked().sendMessage(ChatColor.AQUA+"変更を反映するには再起動してください。");
 					} else {
 						link.setEnabled(false);
+						System.out.println("b");
 					}
 				}
 			} else {
@@ -116,6 +118,7 @@ public class VersionItem extends GUIItem {
 		} else {
 			link = new DBServerPluginLink(-1, RezxisMCHosting.getDBServer(false).getId(), plugin.getName(), plugin.getId(), true, false);
 			Tables.getSplTable().insert(link);
+			e.getWhoClicked().sendMessage(ChatColor.AQUA+"変更を反映するには再起動してください。");
 		}
 		return GUIAction.UPDATE;
 	}
