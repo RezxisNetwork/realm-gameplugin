@@ -47,13 +47,13 @@ public class VersionSelectorMenu extends GUIWindow {
 			}
 		}
 		Collections.sort(plugins, new Sort());
-		if (page > 1) {
+		if (page > 0) {
 			setItem(0, 5, new BackVersionsPage(page,back,pname), map);
 		}
-		if (plugins.size() > 28*page) {
+		if (plugins.size() > 28*(page+1)) {
 			setItem(8, 5, new NextVersionsPage(page,back,pname), map);
 		}
-		int sIndex = 0 + 28*(page-1);
+		int sIndex = 0 + 28*page;
 		int a = 0;
 		for (int i = sIndex; i <= sIndex+27; i++) {
 			if (i == plugins.size())
