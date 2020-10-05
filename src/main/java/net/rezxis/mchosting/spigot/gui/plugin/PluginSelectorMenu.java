@@ -57,6 +57,7 @@ public class PluginSelectorMenu extends GUIWindow {
 			int x = a % 7;
 			int y = (a-x)/7;
 			boolean enabled = false;
+			System.out.println(i+":"+plugins.size());
 			DBServerPluginLink link = Tables.getSplTable().getLink(RezxisMCHosting.getDBServer(false).getId(), plugins.get(i));
 			if (link != null) {
 				enabled = link.isEnabled();
