@@ -34,7 +34,8 @@ public class OpenSkriptItem extends GUIItem {
 
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
-		if (!RezxisMCHosting.getDBServer(false).getPlugins().contains("Skript")) {
+		DBServerPluginLink link = Tables.getSplTable().getLink(RezxisMCHosting.getDBServer(false).getId(), "Skript");
+		if (link == null || !link.isLastEnabled())  {
 			e.getWhoClicked().sendMessage(ChatColor.RED+"Skriptを導入してください。");
 			return GUIAction.NO_ACTION;
 		}
