@@ -93,21 +93,13 @@ public class VersionItem extends GUIItem {
 		if (link != null) {
 			if (link.getPlugin() == plugin.getId()) {
 				if (link.isEnabled()) {
-					if (link.isLastEnabled()) {
-						link.setEnabled(false);
+					link.setEnabled(false);
+					if (link.isLastEnabled())
 						e.getWhoClicked().sendMessage(ChatColor.AQUA+"変更を反映するには再起動してください。");
-					} else {
-						link.setEnabled(true);
-						System.out.println("a");
-					}
 				} else {
-					if (!link.isLastEnabled()) {
-						link.setEnabled(true);
+					link.setEnabled(true);
+					if (!link.isLastEnabled())
 						e.getWhoClicked().sendMessage(ChatColor.AQUA+"変更を反映するには再起動してください。");
-					} else {
-						link.setEnabled(false);
-						System.out.println("b");
-					}
 				}
 			} else {
 				link.setEnabled(true);
