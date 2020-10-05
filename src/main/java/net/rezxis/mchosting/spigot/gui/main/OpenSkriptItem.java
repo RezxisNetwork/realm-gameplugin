@@ -14,6 +14,7 @@ import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;
 import net.rezxis.mchosting.spigot.gui.plugins.config.ConfigManagerMenu;
+import net.rezxis.mchosting.database.Tables;
 
 public class OpenSkriptItem extends GUIItem {
 
