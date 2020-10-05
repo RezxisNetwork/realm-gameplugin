@@ -31,7 +31,7 @@ public class PluginManagerItem extends GUIItem {
 
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
-		new PluginSelectorMenu((Player)e.getWhoClicked(),back,0);
+		new PluginSelectorMenu((Player)e.getWhoClicked(),back,0).delayShow();
 		return GUIAction.CLOSE;
 	}
 }
