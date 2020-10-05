@@ -3,8 +3,10 @@ package net.rezxis.mchosting.spigot.gui.plugin;
 import java.util.ArrayList;
 
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -35,11 +37,18 @@ public class PluginItem extends GUIItem {
 			c = ChatColor.RED;
 		}
 		im.setDisplayName(c+name);
+		if (enabled) {
+			im.addEnchant(Enchantment.DURABILITY, 1, true);
+			im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+		}
 		ArrayList<String> lore = new ArrayList<>();
 		lore.add(c+"状態 : "+(enabled ? "有効" : "無効"));
 		lore.add(ChatColor.AQUA+"クリックで詳細を表示。");
 		im.setLore(lore);
 		is.setItemMeta(im);
+		if (enabled) {
+			is.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
+		}
 		return is;
 	}
 
