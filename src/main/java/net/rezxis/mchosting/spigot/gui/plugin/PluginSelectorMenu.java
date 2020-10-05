@@ -43,13 +43,13 @@ public class PluginSelectorMenu extends GUIWindow {
 				plugins.add(s);
 		}
 		Collections.sort(plugins, new Sort());
-		if (page > 1) {
+		if (page > 0) {
 			setItem(0, 5, new BackPluginPage(page,back), map);
 		}
-		if (plugins.size() > 28*page) {
+		if (plugins.size() > 28*(page+1)) {
 			setItem(8, 5, new NextPluginPage(page,back), map);
 		}
-		int sIndex = 0 + 28*(page-1);
+		int sIndex = 0 + 28*page;
 		int a = 0;
 		for (int i = sIndex; i <= sIndex+27; i++) {
 			if (i == plugins.size())
