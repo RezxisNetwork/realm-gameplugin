@@ -3,6 +3,7 @@ package net.rezxis.mchosting.spigot;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URI;
 import java.util.UUID;
 
@@ -10,6 +11,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
@@ -21,6 +23,7 @@ import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.server.DBServer;
 import net.rezxis.mchosting.network.WSClient;
 import net.rezxis.mchosting.network.packet.sync.SyncPlayerSendPacket;
+import net.rezxis.mchosting.spigot.gui.Glow;
 import net.rezxis.mchosting.spigot.logs.LogFilter2;
 import net.rezxis.mchosting.spigot.tasks.ForceVMKillTask;
 import net.rezxis.mchosting.spigot.tasks.ShutdownTask;
@@ -65,6 +68,7 @@ public class RezxisMCHosting extends JavaPlugin {
 		//((Logger)LogManager.getRootLogger()).addFilter(new LogFilter());
 		Bukkit.getServer().getLogger().setFilter(new LogFilter2());
 		java.util.logging.Logger.getGlobal().setFilter(new LogFilter2());
+		registerGlow();
 	}
 	
 	public void onDisable() {
@@ -78,6 +82,26 @@ public class RezxisMCHosting extends JavaPlugin {
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		return CommandHandler.onCommand(sender, cmd, commandLabel, args);
 	}
+	
+	public void registerGlow() {
+        try {
+            Field f = Enchantment.class.getDeclaredField("acceptingNew");
+            f.setAccessible(true);
+            f.set(null, true);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            Glow glow = new Glow(70);
+            Enchantment.registerEnchantment(glow);
+        }
+        catch (IllegalArgumentException e){
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 	
 	public void hub(Player player) {
 		player.sendMessage(ChatColor.AQUA+"接続中");

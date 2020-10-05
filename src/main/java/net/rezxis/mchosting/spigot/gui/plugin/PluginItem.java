@@ -13,6 +13,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.gui.GUIWindow;
+import net.rezxis.mchosting.spigot.gui.Glow;
 import net.rezxis.mchosting.spigot.gui.plugin.versions.VersionSelectorMenu;
 
 public class PluginItem extends GUIItem {
@@ -40,10 +41,10 @@ public class PluginItem extends GUIItem {
 		lore.add(c+"状態 : "+(enabled ? "有効" : "無効"));
 		lore.add(ChatColor.AQUA+"クリックで詳細を表示。");
 		im.setLore(lore);
-		is.setItemMeta(im);
 		if (enabled) {
-			is.addUnsafeEnchantment(Enchantment.DURABILITY, 1);
+			im.addEnchant(new Glow(70), 1, true);
 		}
+		is.setItemMeta(im);
 		return is;
 	}
 
