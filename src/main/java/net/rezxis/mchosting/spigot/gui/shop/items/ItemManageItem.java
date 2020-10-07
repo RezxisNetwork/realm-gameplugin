@@ -9,21 +9,21 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
-import net.rezxis.mchosting.database.object.server.ShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItem;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.spigot.gui.shop.items.item.ShopItemMenu;
 
 public class ItemManageItem extends GUIItem {
 
-	private ShopItem item;
+	private DBShopItem item;
 	
-	public ItemManageItem(ShopItem item) {
+	public ItemManageItem(DBShopItem item) {
 		super(getIcon(item));
 		this.item = item;
 	}
 	
-	private static ItemStack getIcon(ShopItem item) {
+	private static ItemStack getIcon(DBShopItem item) {
 		ItemStack is = new ItemStack(Material.valueOf(item.getItemType()));
 		ItemMeta im = is.getItemMeta();
 		im.setDisplayName(item.getName());

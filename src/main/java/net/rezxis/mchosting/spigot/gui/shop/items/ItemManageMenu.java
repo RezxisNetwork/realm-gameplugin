@@ -5,8 +5,10 @@ import java.util.HashMap;
 
 import org.bukkit.entity.Player;
 
+import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.server.DBServer;
-import net.rezxis.mchosting.database.object.server.ShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItembase;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.gui.GUIWindow;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;
@@ -24,7 +26,7 @@ public class ItemManageMenu extends GUIWindow {
 	public HashMap<Integer, GUIItem> getOptions() {
 		HashMap<Integer, GUIItem> map = new HashMap<>();
 		DBServer server = RezxisMCHosting.getDBServer(false);
-		ArrayList<ShopItem> items = server.getShop().getItems();
+		ArrayList<DBShopItem> items = Tables.getSiTable().getShopItems(server.getId());
 		if (items.size() > 21*page)
 			setItem(8,5, new NextPageItem(page), map);
 		if (page > 1) {

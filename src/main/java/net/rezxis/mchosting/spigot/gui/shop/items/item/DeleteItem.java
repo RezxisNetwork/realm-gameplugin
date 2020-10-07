@@ -8,7 +8,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.database.object.server.DBServer;
-import net.rezxis.mchosting.database.object.server.ShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItembase;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;
@@ -16,9 +17,9 @@ import net.rezxis.mchosting.spigot.gui.shop.ShopMenu;
 
 public class DeleteItem extends GUIItem {
 
-	private ShopItem item;
+	private DBShopItem item;
 	
-	public DeleteItem(ShopItem item) {
+	public DeleteItem(DBShopItem item) {
 		super(getIcon());
 		this.item = item;
 	}
@@ -33,9 +34,7 @@ public class DeleteItem extends GUIItem {
 
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
-		DBServer server = RezxisMCHosting.getDBServer(false);
-		server.getShop().removeItem(item);
-		server.update();
+		item.delete();
 		new ShopMenu((Player) e.getWhoClicked()).delayShow();
 		return GUIAction.CLOSE;
 	}

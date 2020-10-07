@@ -13,23 +13,24 @@ import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.player.DBPlayer;
 import net.rezxis.mchosting.database.object.server.DBServer;
-import net.rezxis.mchosting.database.object.server.ShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItembase;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;
 
 public class MenuShopItem extends GUIItem {
 
-	private ShopItem item;
+	private DBShopItem item;
 	private boolean preview;
 	
-	public MenuShopItem(ShopItem item, boolean preview) {
+	public MenuShopItem(DBShopItem item, boolean preview) {
 		super(getIcon(item));
 		this.item = item;
 		this.preview = preview;
 	}
 	
-	private static ItemStack getIcon(ShopItem item) {
+	private static ItemStack getIcon(DBShopItem item) {
 		ItemStack is = new ItemStack(Material.valueOf(item.getItemType()));
 		ItemMeta im = is.getItemMeta();
 		im.setDisplayName(item.getName());
@@ -55,7 +56,7 @@ public class MenuShopItem extends GUIItem {
 		DBServer s = RezxisMCHosting.getDBServer(false);
 		item.setEarned(item.getEarned()+item.getPrice());
 		s.update();
-		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), item.getCMD().replace("[player]", player.getName()));
+		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), item.getCmd().replace("[player]", player.getName()));
 		player.sendMessage(item.getName()+ChatColor.GREEN+"を購入しました。");
 		return GUIAction.UPDATE;
 	}

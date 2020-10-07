@@ -11,7 +11,8 @@ import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.player.DBPlayer;
 import net.rezxis.mchosting.database.object.server.DBServer;
-import net.rezxis.mchosting.database.object.server.ShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItembase;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;
@@ -29,7 +30,7 @@ public class GetEarnedItem extends GUIItem {
 		ArrayList<String> lore = new ArrayList<>();
 		lore.add(ChatColor.GRAY+"shopで稼いだ利益を回収します。");
 		int coin = 0;
-		for (ShopItem item : RezxisMCHosting.getDBServer(false).getShop().getItems()) {
+		for (DBShopItem item : Tables.getSiTable().getShopItems(RezxisMCHosting.getDBServer(false).getId())) {
 			coin += item.getEarned();
 		}
 		lore.add(ChatColor.GREEN+"利益: "+ChatColor.GOLD+ChatColor.UNDERLINE+coin+ChatColor.RESET+" "+ChatColor.GOLD+"Realm"+ChatColor.AQUA+"Coins");
@@ -41,10 +42,10 @@ public class GetEarnedItem extends GUIItem {
 	@Override
 	public GUIAction invClick(InventoryClickEvent e) {
 		int coin = 0;
-		DBServer ds = RezxisMCHosting.getDBServer(false);
-		for (ShopItem item : ds.getShop().getItems()) {
+		for (DBShopItem item : Tables.getSiTable().getShopItems(RezxisMCHosting.getDBServer(false).getId())) {
 			coin += item.getEarned();
 			item.setEarned(0);
+			item.update();
 		}
 		if (coin == 0) {
 			e.getWhoClicked().sendMessage(ChatColor.RED+"利益は0なので回収できません。");
@@ -52,7 +53,6 @@ public class GetEarnedItem extends GUIItem {
 			DBPlayer dp = Tables.getPTable().get(e.getWhoClicked().getUniqueId());
 			dp.addCoin(coin);
 			dp.update();
-			ds.update();
 			e.getWhoClicked().sendMessage(""+ChatColor.AQUA+coin+ChatColor.GOLD+"Realm"+ChatColor.AQUA+"Coins"+ChatColor.AQUA+"回収されました。");
 		}
 		return GUIAction.UPDATE;

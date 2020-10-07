@@ -9,27 +9,28 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
-import net.rezxis.mchosting.database.object.server.ShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItembase;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.spigot.ServerListener;
 
 public class SetCommandItem extends GUIItem {
 
-	private ShopItem item;
+	private DBShopItem item;
 	
-	public SetCommandItem(ShopItem item) {
+	public SetCommandItem(DBShopItem item) {
 		super(getIcon(item));
 		this.item = item;
 	}
 	
-	private static ItemStack getIcon(ShopItem item) {
+	private static ItemStack getIcon(DBShopItem item) {
 		ItemStack is = new ItemStack(Material.COMMAND);
 		ItemMeta im = is.getItemMeta();
 		im.setDisplayName(ChatColor.AQUA+"コマンドを設定");
 		ArrayList<String> lore = new ArrayList<>();
 		lore.add(ChatColor.GRAY+"購入されたとき実行されるコマンドを設定します。");
-		lore.add(ChatColor.GRAY+item.getCMD());
+		lore.add(ChatColor.GRAY+item.getCmd());
 		im.setLore(lore);
 		is.setItemMeta(im);
 		return is;

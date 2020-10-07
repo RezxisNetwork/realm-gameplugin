@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import org.bukkit.entity.Player;
 
+import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.gui.GUIWindow;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;
@@ -18,7 +19,7 @@ public class ShopMenu extends GUIWindow {
 	public HashMap<Integer, GUIItem> getOptions() {
 		HashMap<Integer, GUIItem> map = new HashMap<>();
 		setItem(0, new AddItem(), map);
-		if (RezxisMCHosting.getDBServer(false).getShop().getItems().size() != 0) {
+		if (Tables.getSiTable().getShopItems(RezxisMCHosting.getDBServer(false).getId()).size() != 0) {
 			setItem(1, new PreviewItem(), map);
 			setItem(2, new ManageItem(), map);
 		}

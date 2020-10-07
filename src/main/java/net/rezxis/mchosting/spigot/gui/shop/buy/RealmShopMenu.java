@@ -5,8 +5,10 @@ import java.util.HashMap;
 
 import org.bukkit.entity.Player;
 
+import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.server.DBServer;
-import net.rezxis.mchosting.database.object.server.ShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItembase;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.gui.GUIWindow;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;
@@ -29,7 +31,8 @@ public class RealmShopMenu extends GUIWindow {
 		HashMap<Integer,GUIItem> map = new HashMap<>();
 		setItem(0, new YourCoinItem(player), map);
 		DBServer server = RezxisMCHosting.getDBServer(false);
-		ArrayList<ShopItem> items = server.getShop().getItems();
+		//ArrayList<DBShopItembase> items = server.getShop().getItems();
+		ArrayList<DBShopItem> items = Tables.getSiTable().getShopItems(server.getId());
 		if (items.size() > 21*page)
 			setItem(8,5, new NextPageItem(page, preview), map);
 		if (page > 1) {

@@ -8,8 +8,10 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
+import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.server.DBServer;
-import net.rezxis.mchosting.database.object.server.ShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItembase;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.gui.anvil.AnvilGUI;
@@ -17,9 +19,9 @@ import net.rezxis.mchosting.spigot.RezxisMCHosting;
 
 public class RenameItem extends GUIItem {
 
-	private ShopItem item;
+	private DBShopItem item;
 	
-	public RenameItem(ShopItem item) {
+	public RenameItem(DBShopItem item) {
 		super(getIcon());
 		this.item = item;
 	}
@@ -47,7 +49,7 @@ public class RenameItem extends GUIItem {
 			}
 			DBServer server = RezxisMCHosting.getDBServer(false);
 			text = text.replace("&", "§");
-			for (ShopItem item : server.getShop().getItems()) {
+			for (DBShopItem item : Tables.getSiTable().getShopItems(server.getId())) {
 				if (item.getName().equalsIgnoreCase(text)) {
 					pl.sendMessage(ChatColor.RED+"同じ名前は使えません。");
 					new ShopItemMenu(pl,item).delayShow();
@@ -55,7 +57,7 @@ public class RenameItem extends GUIItem {
 				}
 			}
 			item.setName(text);
-			server.update();
+			item.update();
 			new ShopItemMenu(pl,item).delayShow();
 			return AnvilGUI.Response.close();
 		})

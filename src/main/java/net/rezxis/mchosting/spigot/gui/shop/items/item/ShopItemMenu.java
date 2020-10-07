@@ -4,16 +4,17 @@ import java.util.HashMap;
 
 import org.bukkit.entity.Player;
 
-import net.rezxis.mchosting.database.object.server.ShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItembase;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.gui.GUIWindow;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;
 
 public class ShopItemMenu extends GUIWindow {
 
-	private ShopItem item;
+	private DBShopItem item;
 	
-	public ShopItemMenu(Player player, ShopItem item) {
+	public ShopItemMenu(Player player, DBShopItem item) {
 		super(player, item.getName(), 1, RezxisMCHosting.instance);
 		this.item = item;
 	}

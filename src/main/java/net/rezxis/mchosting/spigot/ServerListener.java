@@ -20,12 +20,13 @@ import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.player.DBPlayer;
 import net.rezxis.mchosting.database.object.server.DBServer;
-import net.rezxis.mchosting.database.object.server.ShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItembase;
 import net.rezxis.mchosting.spigot.gui.shop.items.item.ShopItemMenu;
 
 public class ServerListener implements Listener {
 
-	public static HashMap<UUID,ShopItem> cmd = new HashMap<>();
+	public static HashMap<UUID,DBShopItem> cmd = new HashMap<>();
 	public static ArrayList<UUID> vcmd = new ArrayList<>();
 	public static ArrayList<UUID> texture = new ArrayList<>();
 	public static ArrayList<UUID> direct = new ArrayList<>();
@@ -103,7 +104,7 @@ public class ServerListener implements Listener {
 		Player player = event.getPlayer();
 		if (cmd.containsKey(player.getUniqueId())) {
 			event.setCancelled(true);
-			ShopItem item = cmd.get(player.getUniqueId());
+			DBShopItem item = cmd.get(player.getUniqueId());
 			cmd.remove(player.getUniqueId());
 			String message = event.getMessage();
 			if (message.equalsIgnoreCase("cancel")) {
@@ -116,9 +117,8 @@ public class ServerListener implements Listener {
 				new ShopItemMenu(player, item).delayShow();
 				return;
 			}
-			DBServer ds = RezxisMCHosting.getDBServer(false);
-			item.setCMD(message);
-			ds.update();
+			item.setCmd(message);
+			item.update();
 			player.sendMessage(ChatColor.AQUA+"更新されました。");
 			new ShopItemMenu(player, item).delayShow();
 		} else if (vcmd.contains(player.getUniqueId())) {

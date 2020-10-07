@@ -8,7 +8,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import net.md_5.bungee.api.ChatColor;
-import net.rezxis.mchosting.database.object.server.ShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItem;
+import net.rezxis.mchosting.database.object.server.DBShopItembase;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.gui.anvil.AnvilGUI;
@@ -16,9 +17,9 @@ import net.rezxis.mchosting.spigot.RezxisMCHosting;
 
 public class ChangePriceItem extends GUIItem {
 
-	private ShopItem item;
+	private DBShopItem item;
 
-	public ChangePriceItem(ShopItem item) {
+	public ChangePriceItem(DBShopItem item) {
 		super(getIcon());
 		this.item = item;
 	}
@@ -52,7 +53,7 @@ public class ChangePriceItem extends GUIItem {
 					return AnvilGUI.Response.close();
 				}
 				item.setPrice(value);
-				RezxisMCHosting.getDBServer(false).update();
+				item.update();
 			} catch (Exception ex) {
 				pl.sendMessage(ChatColor.RED+"値段を入力してください。");
 				new ShopItemMenu(pl,item).delayShow();
