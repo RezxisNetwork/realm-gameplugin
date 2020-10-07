@@ -111,11 +111,6 @@ public class ServerListener implements Listener {
 				new ShopItemMenu(player, item).delayShow();
 				return;
 			}
-			if (message.contains("{") || message.contains("}") || message.contains(":") || message.contains("\"")) {
-				player.sendMessage(ChatColor.AQUA+"使用できない文字が入っています。");
-				new ShopItemMenu(player, item).delayShow();
-				return;
-			}
 			item.setCmd(message);
 			item.update();
 			player.sendMessage(ChatColor.AQUA+"更新されました。");
