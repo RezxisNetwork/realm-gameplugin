@@ -52,9 +52,8 @@ public class MenuShopItem extends GUIItem {
 		}
 		dp.setCoin(dp.getCoin() - item.getPrice());
 		dp.update();
-		DBServer s = RezxisMCHosting.getDBServer(false);
 		item.setEarned(item.getEarned()+item.getPrice());
-		s.update();
+		item.update();
 		Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), item.getCmd().replace("[player]", player.getName()));
 		player.sendMessage(item.getName()+ChatColor.GREEN+"を購入しました。");
 		return GUIAction.UPDATE;
