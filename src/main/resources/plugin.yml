@@ -2,6 +2,7 @@ name: RezxisMCHosting
 main: net.rezxis.mchosting.spigot.RezxisMCHosting
 version: 0.2
 depend: [RezxisSQLPlugin]
+loadbefore: [Skript]
 commands:
   realm:
     description: open server manager
