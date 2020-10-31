@@ -23,9 +23,9 @@ public class ToggleVisibleItem extends GUIItem {
 		ItemStack is = null;
 		DBServer server = RezxisMCHosting.getDBServer(false);
 		if (server.isVisible()) {
-			is = new ItemStack(Material.LIME_SHULKER_BOX);
+			is = new ItemStack(Material.EMERALD_BLOCK);
 		} else  {
-			is = new ItemStack(Material.RED_SHULKER_BOX);
+			is = new ItemStack(Material.REDSTONE_BLOCK);
 		}
 		ItemMeta im = is.getItemMeta();
 		if (server.isVisible()) {
