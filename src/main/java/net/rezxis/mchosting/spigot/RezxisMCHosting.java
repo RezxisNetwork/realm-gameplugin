@@ -25,7 +25,6 @@ import net.rezxis.mchosting.database.Tables;
 import net.rezxis.mchosting.database.object.server.DBServer;
 import net.rezxis.mchosting.network.WSClient;
 import net.rezxis.mchosting.network.packet.sync.SyncPlayerSendPacket;
-import net.rezxis.mchosting.spigot.gui.Glow;
 import net.rezxis.mchosting.spigot.logs.LogFilter2;
 import net.rezxis.mchosting.spigot.tasks.ForceVMKillTask;
 import net.rezxis.mchosting.spigot.tasks.ShutdownTask;
@@ -70,7 +69,6 @@ public class RezxisMCHosting extends JavaPlugin {
 		//((Logger)LogManager.getRootLogger()).addFilter(new LogFilter());
 		Bukkit.getServer().getLogger().setFilter(new LogFilter2());
 		java.util.logging.Logger.getGlobal().setFilter(new LogFilter2());
-		registerGlow();
 	}
 	
 	public void onDisable() {
@@ -101,26 +99,6 @@ public class RezxisMCHosting extends JavaPlugin {
 			ex.printStackTrace();
 		}
 	}
-	
-	public void registerGlow() {
-        try {
-            Field f = Enchantment.class.getDeclaredField("acceptingNew");
-            f.setAccessible(true);
-            f.set(null, true);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            Glow glow = new Glow(70);
-            Enchantment.registerEnchantment(glow);
-        }
-        catch (IllegalArgumentException e){
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-    }
 	
 	public void hub(Player player) {
 		player.sendMessage(ChatColor.AQUA+"接続中");

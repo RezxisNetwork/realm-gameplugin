@@ -3,6 +3,7 @@ package net.rezxis.mchosting.spigot.gui.plugin;
 import java.util.ArrayList;
 
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
@@ -12,7 +13,6 @@ import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.gui.GUIWindow;
-import net.rezxis.mchosting.spigot.gui.Glow;
 import net.rezxis.mchosting.spigot.gui.plugin.versions.VersionSelectorMenu;
 
 public class PluginItem extends GUIItem {
@@ -41,7 +41,7 @@ public class PluginItem extends GUIItem {
 		lore.add(ChatColor.AQUA+"クリックで詳細を表示。");
 		im.setLore(lore);
 		if (enabled) {
-			im.addEnchant(new Glow(70), 1, true);
+			im.addEnchant(Enchantment.DURABILITY, 1, true);
 		}
 		is.setItemMeta(im);
 		return is;
