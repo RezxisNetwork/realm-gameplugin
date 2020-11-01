@@ -16,7 +16,7 @@ import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.gui.GUIWindow;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;
 import net.rezxis.mchosting.spigot.gui.plugins.config.file.FileManagerMenu;
-import net.rezxis.mchosting.gui.anvil.AnvilGUI;
+import net.wesjd.anvilgui.AnvilGUI;
 
 public class CreateFileItem extends GUIItem {
 

@@ -14,7 +14,7 @@ import net.rezxis.mchosting.database.object.server.DBServer;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;
-import net.rezxis.mchosting.gui.anvil.AnvilGUI;
+import net.wesjd.anvilgui.AnvilGUI;
 
 public class MotdItem extends GUIItem {
 

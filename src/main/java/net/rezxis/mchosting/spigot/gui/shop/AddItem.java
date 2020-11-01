@@ -16,7 +16,7 @@ import net.rezxis.mchosting.database.object.server.DBShopItem;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;
-import net.rezxis.mchosting.gui.anvil.AnvilGUI;
+import net.wesjd.anvilgui.AnvilGUI;
 
 public class AddItem extends GUIItem {
 

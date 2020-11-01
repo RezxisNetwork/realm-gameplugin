@@ -22,7 +22,7 @@ import net.rezxis.mchosting.gui.GUIItem;
 import net.rezxis.mchosting.gui.GUIWindow;
 import net.rezxis.mchosting.spigot.WebAPI;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;
-import net.rezxis.mchosting.gui.anvil.AnvilGUI;
+import net.wesjd.anvilgui.AnvilGUI;
 
 public class UploadFileItem extends GUIItem {
 

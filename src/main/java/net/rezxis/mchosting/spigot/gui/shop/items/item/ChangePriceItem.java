@@ -11,7 +11,7 @@ import net.md_5.bungee.api.ChatColor;
 import net.rezxis.mchosting.database.object.server.DBShopItem;
 import net.rezxis.mchosting.gui.GUIAction;
 import net.rezxis.mchosting.gui.GUIItem;
-import net.rezxis.mchosting.gui.anvil.AnvilGUI;
+import net.wesjd.anvilgui.AnvilGUI;
 import net.rezxis.mchosting.spigot.RezxisMCHosting;
 
 public class ChangePriceItem extends GUIItem {
