@@ -22,7 +22,7 @@ public class DirectConnectItem extends GUIItem {
 	}
 	
 	private static ItemStack getIcon() {
-		ItemStack is = new ItemStack(Material.WOODEN_DOOR);
+		ItemStack is = new ItemStack(Material.FENCE_GATE);
 		ItemMeta im = is.getItemMeta();
 		im.setDisplayName(ChatColor.GREEN+"直アドレス");
 		ArrayList<String> lore = new ArrayList<>();
