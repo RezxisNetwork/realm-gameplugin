@@ -116,6 +116,7 @@ public class ServerListener implements Listener {
 			player.sendMessage(ChatColor.AQUA+"更新されました。");
 			new ShopItemMenu(player, item).delayShow();
 		} else if (vcmd.contains(player.getUniqueId())) {
+			event.setCancelled(true);
 			String message = event.getMessage();
 			vcmd.remove(player.getUniqueId());
 			if (message.equalsIgnoreCase("cancel")) {
@@ -138,6 +139,7 @@ public class ServerListener implements Listener {
 			player.sendMessage(ChatColor.GREEN+message+"に投票時実行されるコマンドは変更されました。");
 			event.setCancelled(true);
 		} else if (texture.contains(player.getUniqueId())) {
+			event.setCancelled(true);
 			String message = event.getMessage();
 			texture.remove(player.getUniqueId());
 			if (message.equalsIgnoreCase("cancel")) {
@@ -154,7 +156,6 @@ public class ServerListener implements Listener {
 			ds.setResource(message);
 			ds.update();
 			player.sendMessage(ChatColor.GREEN+message+"にテクスチャは変更されました。");
-			event.setCancelled(true);
 		} else if (direct.contains(player.getUniqueId())) {
 			event.setCancelled(true);
 			direct.remove(player.getUniqueId());

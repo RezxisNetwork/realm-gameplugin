@@ -21,7 +21,7 @@ public class TextureItem extends GUIItem {
 	}
 	
 	private static ItemStack getIcon() {
-		ItemStack is = new ItemStack(Material.GOLD_ORE);
+		ItemStack is = new ItemStack(Material.STAINED_GLASS_PANE);
 		ItemMeta im = is.getItemMeta();
 		im.setDisplayName(ChatColor.GREEN+"テクスチャ");
 		ArrayList<String> lore = new ArrayList<>();
