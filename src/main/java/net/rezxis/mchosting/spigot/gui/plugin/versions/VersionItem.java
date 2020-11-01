@@ -80,6 +80,7 @@ public class VersionItem extends GUIItem {
 		}
 		list.add(ChatColor.AQUA+"--------------------------");
 		list.add(ChatColor.AQUA+"Version : "+plugin.getVersion());
+		list.add(ChatColor.AQUA+"推奨MC Version : "+plugin.getRecom());
 		list.add(ChatColor.AQUA+"状態 : "+now);
 		list.add(ChatColor.AQUA+"クリックで"+act);
 		im.setLore(list);
